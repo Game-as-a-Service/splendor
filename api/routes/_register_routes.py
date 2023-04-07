@@ -18,7 +18,7 @@ def setup_routes(app: Flask):
 
     api = Api(app)
     api.add_resource(ApiHome, "/")
-    api.add_resource(ApiPreview, "/preview/chip/KO")
+    api.add_resource(ApiPreview, "/preview")
 
     # User 相關
     api.add_resource(ApiLogout, "/logout")

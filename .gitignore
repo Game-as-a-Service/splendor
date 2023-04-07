@@ -10,14 +10,11 @@ alembic.ini
 # jetbrain PyCharm
 /.idea/
 
-# nike static file
+# static file
 api_config.py
-/api/static/growin-stock-mining.json
-/api/static/growin-stock-product-mapping.json
-/api/static/screener-option.json
-/api/static/growin-stripe.json
+/api/static/
 
-# nike check code style and test coverage
+# check code style and test coverage
 check.sh
 .pytest_cache/
 .coverage

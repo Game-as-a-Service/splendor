@@ -5,8 +5,8 @@ stages:
 
 variables:
   PYTHONIOENCODING: utf8
-  DOCKER_REGISTRY: 647929343762.dkr.ecr.us-west-1.amazonaws.com
-  APP_NAME: nike
+  DOCKER_REGISTRY: Replace ME
+  APP_NAME: Gem
 
 test:
   stage: test
@@ -14,7 +14,7 @@ test:
     paths:
       - venv
   tags:
-    - TradingValley-Runner-1
+    - Runner-1
   only:
     refs:
       - dev
@@ -34,7 +34,7 @@ test:
     - sleep 30
     - sh scripts/gitlab-ci/wait-mysql-ready.sh
     - sh scripts/gitlab-ci/create-required-static-file.sh
-    - pip install -e '.[dev]' --ignore-installed --index-url https://tv-pypi:Leadinfo@dev.tradingvalley.com/pypi
+    - pip install -e '.[dev]'
   script:
     - flake8 api/
     - flake8 tests/
@@ -46,7 +46,7 @@ test:
 build:
   stage: build
   tags:
-    - TradingValley-Runner-1
+    - Runner-1
   only:
     refs:
       - dev
@@ -61,7 +61,7 @@ build:
 deploy:
   stage: deploy
   tags:
-    - TradingValley-Runner-1
+    - Runner-1
   only:
     refs:
       - dev

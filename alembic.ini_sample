@@ -52,7 +52,7 @@ version_path_separator = os  # Use os.pathsep. Default configuration used for ne
 # are written from script.py.mako
 # output_encoding = utf-8
 
-sqlalchemy.url = mysql+pymysql://root:secret@127.0.0.1:3306/push_notification
+sqlalchemy.url = mysql+pymysql://root:secret@127.0.0.1:3306/ReplaceME
 
 
 [post_write_hooks]
