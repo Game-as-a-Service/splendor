@@ -1,0 +1,73 @@
+stages:
+  - test
+  - build
+  - deploy
+
+variables:
+  PYTHONIOENCODING: utf8
+  DOCKER_REGISTRY: 647929343762.dkr.ecr.us-west-1.amazonaws.com
+  APP_NAME: nike
+
+test:
+  stage: test
+  cache:
+    paths:
+      - venv
+  tags:
+    - TradingValley-Runner-1
+  only:
+    refs:
+      - dev
+      - uat
+      - master
+      - merge_requests
+  before_script:
+    - pwd
+    - docker -v
+    - docker-compose -v
+    - git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
+    - echo https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com > ~/.git-credentials
+    - echo -e "[credential]\n\thelper = store" > ~/.gitconfig
+    - python3 -m venv venv
+    - . venv/bin/activate
+    - sudo docker-compose up -d
+    - sleep 30
+    - sh scripts/gitlab-ci/wait-mysql-ready.sh
+    - sh scripts/gitlab-ci/create-required-static-file.sh
+    - pip install -e '.[dev]' --ignore-installed --index-url https://tv-pypi:Leadinfo@dev.tradingvalley.com/pypi
+  script:
+    - flake8 api/
+    - flake8 tests/
+    - pytest -x --cov=api --cov-fail-under=70 --spec
+  after_script:
+    - sudo docker-compose down
+  coverage: '/Total coverage: ([.\d]+)%/'
+
+build:
+  stage: build
+  tags:
+    - TradingValley-Runner-1
+  only:
+    refs:
+      - dev
+      - uat
+      - master
+  before_script:
+    - aws --version
+    - docker --version
+  script:
+    - sh scripts/gitlab-ci/build.sh
+
+deploy:
+  stage: deploy
+  tags:
+    - TradingValley-Runner-1
+  only:
+    refs:
+      - dev
+      - uat
+      - master
+  script:
+    - echo "開始部署"
+    - bash scripts/gitlab-ci/deploy.sh
+    - echo "部署成功"

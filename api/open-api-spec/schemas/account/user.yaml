@@ -1,0 +1,116 @@
+get:
+  summary: 取得會員資料
+  description: 取得會員資料
+  security:
+    - bearerAuth: [ ]
+  tags:
+    - Account
+  responses:
+    200:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              data:
+                type: object
+                properties:
+                  subscribed:
+                    type: boolean
+                    description: 是否有訂閱過
+                  plan:
+                    type: string
+                    description: 訂閱方案
+                  subscribedAt:
+                    type: string
+                    description: 訂閱日期
+                  expireAt:
+                    type: string
+                    description: 訂閱到期日
+                  watchlist:
+                    type: list
+                    description: 追蹤清單
+                  watchlistIdx:
+                    type: integer
+                    description: 上次瀏覽的追蹤清單index
+                  accountType:
+                    type: string
+                    description: 會員帳戶類型 (normal, business)
+          example:
+            {
+              "data": {
+                "subscribed": true,
+                "plan": "Premium Monthly",
+                "subscribedAt": "2022-09-01",
+                "expireAt": "2050-12-31",
+                "watchlist": [
+                  {
+                    "name": "123",
+                    "symbols": [
+                      "AMZN"
+                    ],
+                    "watchlistId": "f06e9da51b0246c5b2712262acc80a10"
+                  },
+                  {
+                    "name": "456",
+                    "symbols": [ ],
+                    "watchlist_id": "515652080e7c4ac2a349de56a920eb3f"
+                  }
+                ],
+                "watchlistIdx": 0,
+                "accountType": "business"
+              },
+              "message": "Success"
+            }
+
+put:
+  tags:
+    - Account
+  summary: 修改會員資料
+  description: 修改會員資料
+  security:
+    - bearerAuth: [ ]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            watchlistIdx:
+              type: integer
+              description: 追蹤清單 index
+        example:
+          {
+            "watchlistIdx": 0
+          }
+  responses:
+    200:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+          example:
+            {
+              "message": "Success"
+            }
+    422:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+          example:
+            {
+              "message": "watchlistIdx not in payload."
+            }

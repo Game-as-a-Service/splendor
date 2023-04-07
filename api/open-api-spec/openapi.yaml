@@ -1,0 +1,32 @@
+openapi: 3.0.3
+tags:
+  - name: API狀態
+    description: 確認API狀態
+
+  - name: Account
+    description: 用戶資訊相關 API
+
+components:
+  securitySchemes:
+    bearerAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT # optional, arbitrary value for documentation purposes
+info:
+  title: TradingValley Nike APIs
+  description: TradingValley Nike APIs
+  version: "1.0"
+  contact:
+    name: Amos
+    email: amoswang@leadinfo.com.tw
+
+servers:
+  - url: "http://127.0.0.1:5000"
+    description: Local 環境
+
+paths:
+  "/":
+    $ref: "schemas/alive.yaml"
+
+  "/user":
+    $ref: "schemas/account/user.yaml"

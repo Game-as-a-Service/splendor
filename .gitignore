@@ -1,0 +1,23 @@
+venv/
+__pycache__/
+logs/
+alembic.ini
+.DS_Store
+.vscode/
+*.egg-info
+
+
+# jetbrain PyCharm
+/.idea/
+
+# nike static file
+api_config.py
+/api/static/growin-stock-mining.json
+/api/static/growin-stock-product-mapping.json
+/api/static/screener-option.json
+/api/static/growin-stripe.json
+
+# nike check code style and test coverage
+check.sh
+.pytest_cache/
+.coverage

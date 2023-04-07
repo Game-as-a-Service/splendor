@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  mysql-8.0.26:
+    platform: linux/amd64
+    image: mysql:8.0.26
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql-dumps:/docker-entrypoint-initdb.d
+      - ./docker/mysql-conf/mysqld.cnf:/etc/mysql/conf.d/mysqld.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: nike
+
+  redis-6:
+    image: redis:6
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./docker/redis-conf:/usr/local/etc/redis
+    entrypoint: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]

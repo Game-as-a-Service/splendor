@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <title>OpenAPI Spec</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.45.0/swagger-ui.css"
+          integrity="sha512-Rw/7dCUZTFnqoLuU6md0cBNNb56ZxUeXTRa1P07wHKsNGBQuHin3wr8TQbQiyuF8CENSeqgqV2P9FMIo+gv3JA=="
+          crossorigin="anonymous"/>
+</head>
+
+<body>
+<div id="spec"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.45.0/swagger-ui-bundle.js"
+        integrity="sha512-bHgvaF5Y0DCteC1WKJYfMQl585oFQM0T2C7Zp02m7US7iI95NierKwFhZ4CJ9OsFicDwH6rH04DG4WQewgVWLQ=="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.45.0/swagger-ui-standalone-preset.js"
+        integrity="sha512-A6z20R2fizmO0809rnyeLGN6IjkLLCDc65DjEl2nZOkeW5Lp6IMgAHXG34FZ4NvgDjpLnfTwryebDwWzS3VBsg=="
+        crossorigin="anonymous"></script>
+<script type="application/javascript">
+    window.onload = function () {
+        const ui = SwaggerUIBundle({
+            url: "openapi.yaml",
+            deepLinking: true,
+            dom_id: '#spec',
+            presets: [
+                SwaggerUIBundle.presets.apis,
+                SwaggerUIBundle.SwaggerUIStandalonePreset
+            ],
+            plugins: [
+                SwaggerUIBundle.plugins.DownloadUrl
+            ],
+            layout: "BaseLayout",
+        })
+        window.ui = ui
+    }
+</script>
+</body>
+
+</html>

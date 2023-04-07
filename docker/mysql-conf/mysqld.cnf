@@ -1,0 +1,7 @@
+[mysqld]
+sql_mode=IGNORE_SPACE,STRICT_TRANS_TABLES
+max_connections = 500
+max_allowed_packet = 25600000
+character-set-server = utf8
+collation-server = utf8_unicode_ci
+skip-character-set-client-handshake

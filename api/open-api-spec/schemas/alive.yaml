@@ -1,0 +1,18 @@
+get:
+  summary: API狀態
+  tags:
+    - API狀態
+  responses:
+    200:
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+          example:
+            {
+              message: "API is alive."
+            }
