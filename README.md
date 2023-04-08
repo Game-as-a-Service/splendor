@@ -1,28 +1,42 @@
-# Nike Flask Backend
+# Gem
 
 ## 系統需求
 ### Python
 - Version: >= `3.10`
 
-### 建立 python virtual environment
+### 使用Poetry 管理套件與環境
 在 project 目錄下執行下面的 command
+[Poetry](https://blog.kyomind.tw/python-poetry/)
 
+安裝完成Poetry後，執行下面的指令修改設定檔
+- 虛擬環境的路徑改為「專案的根目錄」
+- 名稱固定為`.venv`。
 ```bash
-python3 -m venv venv
-. venv/bin/activate
+poetry config virtualenvs.in-project true
 ```
 
 ### 安裝 dependency
 ```bash
-pip install -r requirements.txt
-pip install -e '.[dev]' --index-url https://tv-pypi:Leadinfo@dev.tradingvalley.com/pypi
+poetry init  # 初始化，建立 pyproject.toml
+poetry env use python  # 建立專案虛擬環境並使用
+poetry shell  # 啟用虛擬環境，若沒有虛擬環境自動幫你建立並使用
+poetry install  # 依poetry.lock記載的套件版本安裝到虛擬環境中，類似npm install \
+poetry add xxx  # == pip install xxx
+poetry add --group dev xxx  # == pip install in dev
+poetry remove xxx  # == pip uninstall xxx  
 ```
 
 ### 設定檔 Config
 複製 `config/sample_api_config.py` 到 `config/api_config.py`，接著修改 `config/api_config.py` 配置內容
+```bash
+cp config/sample_api_config.py config/api_config.py
+```
 
-複製  `alembic.ini_sample` 到 `alembic.ini`
 
+複製  `alembic.ini_sample` 到 `alembic.ini` 並配置sqlalchemy.url
+```bash
+cp alembic.ini_sample alembic.ini
+```
 ### Docker
 若需要起 Local docker server
 
@@ -32,5 +46,12 @@ pip install -e '.[dev]' --index-url https://tv-pypi:Leadinfo@dev.tradingvalley.c
 在 project 目錄下執行
 
 ```bash
-docker-compose down && docker-compose up
+docker-compose down && docker-compose up -d
+```
+
+### mysql資料庫 migration
+```bash
+alembic upgrade heads # 進版
+alembic downgrade base # 回版
+alembic revision -m "message" # 產生migration檔案
 ```

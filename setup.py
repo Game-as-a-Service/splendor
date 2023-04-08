@@ -10,7 +10,6 @@ extras_require = {
     "dev": [
         'flake8',
         'flake8-bugbear>=21.11.28',
-        'flake8-eradicate',
         'flake8-mutable',
         'flake8-print',
         'flake8-return',
@@ -24,7 +23,7 @@ extras_require = {
 }
 
 setup(
-    name='stock-mining-api',
+    name='Gem',
     version='1.0.0',
     python_requires='>=3.10',
     include_package_data=True,

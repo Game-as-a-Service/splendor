@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "gem"
+version = "0.1.0"
+description = ""
+authors = ["I-Chun Hsu <a13579230@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flask-caching = "2.0.0"
+flask-cors = "3.0.10"
+flask-restful = "0.3.9"
+flask-session = "0.4.0"
+flask = "2.1.2"
+pyyaml = "6"
+sqlalchemy = "1.4.37"
+boto3 = ">=1.26.15"
+cryptography = "37.0.4"
+discord-webhook = "0.15.0"
+dollar-ref = ">=0.1.3"
+flask-jwt-extended = "4.4.2"
+gunicorn = "20.1.0"
+jsonschema = "4.9.1"
+jwcrypto = ">=1.4.2,<1.5.0"
+pandas = ">=1.5.1,<1.6.0"
+paramiko = "2.12.0"
+passlib = "1.7.4"
+pinject = "0.14.1"
+pyhumps = "3.7.1"
+pyjwt = {version = "2.4.0", extras = ["crypto"]}
+pymysql = "1.0.2"
+python-dateutil = "2.8.2"
+redis = "4.2.0"
+requests = "2.27.1"
+stripe = "3.2.0"
+validators = "0.20.0"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.0.0"
+flake8-bugbear = "^23.3.23"
+flake8-mutable = "^1.2.0"
+flake8-print = "^5.0.0"
+flake8-return = "^1.2.0"
+mccabe = "^0.7.0"
+pep8-naming = "^0.13.3"
+pytest-cov = "^4.0.0"
+pytest-flask = "^1.2.0"
+pytest-spec = "^3.2.0"
+pytest = "^7.2.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
