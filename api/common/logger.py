@@ -53,7 +53,6 @@ class Logging:
                 service_name=app_name,
                 environment=app_env,
                 webhook_url=discord_hook,
-                avatar_url="https://meethub.bnext.com.tw/wp-content/uploads/avatars/65881/60346acef330f-bpfull.png"
             )
             discord_handler.setFormatter(discord_formatter)
             discord_handler.setLevel(discord_level)

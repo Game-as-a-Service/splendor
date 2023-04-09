@@ -13,12 +13,12 @@ components:
       scheme: bearer
       bearerFormat: JWT # optional, arbitrary value for documentation purposes
 info:
-  title: TradingValley Nike APIs
-  description: TradingValley Nike APIs
+  title: Gem
+  description: Gem
   version: "1.0"
   contact:
-    name: Amos
-    email: amoswang@leadinfo.com.tw
+    name: Eugene
+    email: a13579230@gmail.com
 
 servers:
   - url: "http://127.0.0.1:5000"

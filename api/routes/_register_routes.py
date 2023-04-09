@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_restful import Api
-from api.routes.account.api_logout import ApiLogout
 from api.routes.account.api_user_profile import ApiUserProfile
 from api.routes.api_home import ApiHome
 from api.routes.api_preview import ApiPreview
@@ -21,5 +20,4 @@ def setup_routes(app: Flask):
     api.add_resource(ApiPreview, "/preview")
 
     # User 相關
-    api.add_resource(ApiLogout, "/logout")
-    api.add_resource(ApiUserProfile, "/user")
+    api.add_resource(ApiUserProfile, "/user","/user/<user_id>")

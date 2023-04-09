@@ -5,21 +5,14 @@ import pinject
 from flask import Flask
 
 
-from api.biz.account.normal_account_service import NormalAccountService
+from api.biz.account.user_info_service import UserInfoService
 
 from api.common.mail.system_mailer import SystemMailer
-from api.common.updated_at_utils import UpdatedAtUtils
 from config.api_config import Config
 
 service_classes = [
-
-    NormalAccountService,
-
+    UserInfoService,
     SystemMailer,
-
-
-    UpdatedAtUtils,
-
 ]
 
 

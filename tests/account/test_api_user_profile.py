@@ -1,12 +1,10 @@
 from tests.base_flask_test_case import BaseFlaskTestCase
-
-
+from dbmodels.user_profile.user_info import UserInfo
+from flask.testing import FlaskClient
+from werkzeug.test import TestResponse
 class TestApiUserProfile(BaseFlaskTestCase):
-    business_user = "business-user"
-    business_plan = "Basic Yearly"
-    business_account_type = "business"
 
-    watchlist = [{"name": "test", "symbols": [], "watchlist_id": "test"}]
+
 
     def setUp(self) -> None:
         super().setUp()
@@ -16,3 +14,33 @@ class TestApiUserProfile(BaseFlaskTestCase):
     def tearDown(self) -> None:
         self._clear_test_data()
         return super().tearDown()
+
+
+    def _prepare_test_data(self):
+        self.user_sql_session.add(UserInfo(**{
+            "user_id": 'test',
+            "name": 'test',
+        }))
+        self.user_sql_session.flush()
+
+    def _clear_test_data(self):
+        self.user_sql_session.query(UserInfo) \
+            .filter(UserInfo.user_id =='test') \
+            .delete()
+        self.user_sql_session.flush()
+        self.cache.clear()
+
+    def _setup_session(self, client: FlaskClient):
+        with client.session_transaction() as sess:
+            pass
+    def test_it_should_404_when_url_is_wrong(self):
+        """URL錯誤，應該回應404"""
+        with self.app.test_client() as client:
+            res: TestResponse = client.get("/users")
+            self.assertEqual(404, res.status_code)
+
+    def test_it_should_200_when_user_exists(self):
+        """一般用戶存在，應該回應200"""
+        with self.app.test_client() as client:
+            res: TestResponse = client.get("/users/test")
+            self.assertEqual(200, res.status_code)
