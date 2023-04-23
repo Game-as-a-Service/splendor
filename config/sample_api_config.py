@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    APP_NAME = "Gem"
+    APP_NAME = "splendor"
     ENV_SET = "Local"
     DEBUG = True
 
@@ -14,9 +14,9 @@ class Config:
 
     # log setting
     LOG_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "logs"))
-    LOG_PATH_ERROR = os.path.join(LOG_PATH, "gem_error.log")
-    LOG_PATH_INFO = os.path.join(LOG_PATH, "gem_info.log")
-    LOG_PATH_DEBUG = os.path.join(LOG_PATH, "gem_debug.log")
+    LOG_PATH_ERROR = os.path.join(LOG_PATH, "splendor_error.log")
+    LOG_PATH_INFO = os.path.join(LOG_PATH, "splendor_info.log")
+    LOG_PATH_DEBUG = os.path.join(LOG_PATH, "splendor_debug.log")
     LOG_FILE_MAX_BYTES = 100 * 1024 * 1024
     LOG_FILE_BACKUP_COUNT = 10
 
@@ -34,12 +34,12 @@ class Config:
 
     # MySQL and SQLAlchemy Setting
 
-    # Gem DB
+    # splendor DB
     USER_DB_HOST = "127.0.0.1"
     USER_DB_PORT = 3306
     USER_DB_USER = "root"
     USER_DB_PWD = "secret"
-    USER_DB_NAME = "gem"
+    USER_DB_NAME = "splendor"
 
     USER_DATABASE_URI = f"mysql+pymysql://{USER_DB_USER}:{USER_DB_PWD}@{USER_DB_HOST}:{USER_DB_PORT}/{USER_DB_NAME}?charset=utf8mb4"  # noqa: E501
     SQLALCHEMY_POOL_SIZE = 20
@@ -53,7 +53,7 @@ class Config:
     SESSION_USE_SIGNER = True
     SESSION_COOKIE_SECURE = False
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_KEY_PREFIX = f"{ENV_SET}-gem-session:"
+    SESSION_KEY_PREFIX = f"{ENV_SET}-splendor-session:"
     SESSION_REDIS_HOST = "localhost"
     SESSION_REDIS_PASSWORD = "secret"
     SESSION_REDIS_PORT = "6379"
@@ -66,7 +66,7 @@ class Config:
     CACHE_REDIS_HOST = SESSION_REDIS_HOST
     CACHE_REDIS_PORT = SESSION_REDIS_PORT
     CACHE_REDIS_PASSWORD = SESSION_REDIS_PASSWORD
-    CACHE_KEY_PREFIX = f"{ENV_SET}-gem-cache:"
+    CACHE_KEY_PREFIX = f"{ENV_SET}-splendor-cache:"
     CACHE_DEFAULT_TIMEOUT = 4320
     CACHE_REDIS_DB = 10
     CACHE_THRESHOLD = 922337203685477580
