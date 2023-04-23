@@ -9,18 +9,14 @@
 │   ├── script.py.mako
 │   └── versions        # migration version
 ├── alembic.ini_sample  # database migration config
-├── application                 # api
-├── domain           
-├── interface
-│   ├── api     
-│   ├── open-api-spec   # open api spec
-│   ├── dbmodels
+├── application         # usercase
+├── domain              # domain entity
+├── interface           # interface adapter
+│   ├── api             # 處理http request
+│   ├── repository      # 處理資料庫溝通
 ├── config              # config
 │   └── sample_api_config.py
 ├── docker              # docker mysql redis config
-│   ├── mysql-conf
-│   ├── mysql-dumps
-│   └── redis-conf
 ├── docker-compose.yaml # docker-compose config
 ├── Dockerfile
 ├── logs                # log
@@ -42,7 +38,7 @@
 
 ### 使用Poetry 管理套件與環境
 在 project 目錄下執行下面的 command
-[Poetry](https://blog.kyomind.tw/python-poetry/)
+[安裝參考](https://blog.kyomind.tw/python-poetry/)
 
 安裝完成Poetry後，執行下面的指令修改設定檔
 - 虛擬環境的路徑改為「專案的根目錄」
@@ -53,7 +49,6 @@ poetry config virtualenvs.in-project true
 
 ### 安裝 dependency
 ```bash
-poetry init  # 初始化，建立 pyproject.toml
 poetry env use python  # 建立專案虛擬環境並使用
 poetry shell  # 啟用虛擬環境，若沒有虛擬環境自動幫你建立並使用
 poetry install  # 依poetry.lock記載的套件版本安裝到虛擬環境中，類似npm install \
@@ -69,7 +64,7 @@ cp config/sample_api_config.py config/api_config.py
 ```
 
 
-複製  `alembic.ini_sample` 到 `alembic.ini` 並配置sqlalchemy.url
+複製  `alembic.ini_sample` 到 `alembic.ini` 並把55行的改成`sqlalchemy.url = mysql+pymysql://root:secret@127.0.0.1:3306/gem`
 ```bash
 cp alembic.ini_sample alembic.ini
 ```
@@ -84,10 +79,77 @@ cp alembic.ini_sample alembic.ini
 ```bash
 docker-compose down && docker-compose up -d
 ```
+確認 docker container 是否正常運作，執行下面的指令，需看到 `mysql` 與 `redis` 的 container
+```bash
+docker ps
+```
+進入 mysql container
+```bash
+docker exec -it mysql8 mysql -psecret
+# 退出
+exit
+```
 
 ### mysql資料庫 migration
 ```bash
 alembic upgrade heads # 進版
 alembic downgrade base # 回版
 alembic revision -m "message" # 產生migration檔案
+```
+
+### 啟動專案
+- 方法一指令
+```bash
+export FLASK_APP=mainapp.py
+flask run
+```
+- 方法二vscode launch.json
+```
+mkdir .vscode
+touch .vscode/launch.json
+```
+把以下參數丟入launch.json
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Flask",
+            "type": "python",
+            "request": "launch",
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "mainapp.py",
+                "FLASK_ENV": "development"
+            },
+            "args": [
+                "run",
+                "--no-debugger",
+                "--no-reload"
+            ],
+            "jinja": true
+        }
+    ]
+}
+```
+按下F5即可啟動
+
+### 專案啟動後，可以透過下面的URL，來確認是否正常運作
+`127.0.0.1:5000`
+`127.0.0.1:5000/open-api-spec`
+
+## 開發流程
+### 建立新的 branch
+```bash
+git checkout -b feature/xxx
+```
+### 先寫測試
+### 寫程式
+### 直到把測試跑過
+### 寫swagger文件
+### 推上github
+```bash
+git add .
+git commit -m "xxx"
+git push origin feature/xxx
 ```
