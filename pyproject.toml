@@ -52,6 +52,7 @@ alembic = "^1.10.3"
 black = "^23.3.0"
 isort = "5.12.0"
 pre-commit = "^3.2.2"
+docker = "^6.0.1"
 
 [build-system]
 requires = ["poetry-core"]

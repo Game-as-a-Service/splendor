@@ -8,9 +8,9 @@ from flask_caching.backends.base import BaseCache
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
-from api import create_app
-from api.containers.services_container import ServicesContainer
 from config.api_config import Config
+from interface.api import create_app
+from interface.api.containers.services_container import ServicesContainer
 
 TestCase.maxDiff = None
 
@@ -30,7 +30,6 @@ class BaseFlaskTestCase(TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-
         super().setUpClass()
         cls.app: Flask = create_app()
         cls.app.testing = True
@@ -47,13 +46,12 @@ class BaseFlaskTestCase(TestCase):
             pool_recycle=cls.app.config["SQLALCHEMY_POOL_RECYCLE"],
             pool_timeout=cls.app.config["SQLALCHEMY_POOL_TIMEOUT"],
             encoding="utf8",
-            pool_pre_ping=True
+            pool_pre_ping=True,
         )
         cls.user_sql_session = sessionmaker(bind=user_engine, autocommit=True)()
 
     @classmethod
     def tearDownClass(cls) -> None:
-
         if cls.user_sql_session:
             cls.user_sql_session.close_all()
 
@@ -63,9 +61,9 @@ class BaseFlaskTestCase(TestCase):
         setattr(cls, "app_context", None)
         setattr(cls, "container", None)
 
-        setattr(cls, 'user_sql_session', None)
+        setattr(cls, "user_sql_session", None)
 
-        setattr(cls, 'cache', None)
+        setattr(cls, "cache", None)
 
     def setUp(self) -> None:
         return super().setUp()

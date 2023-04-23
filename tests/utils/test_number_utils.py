@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-from api.common.number_utils import decimal_to_float, str_to_float
+from interface.api.common.number_utils import decimal_to_float, str_to_float
 from tests.base_flask_test_case import BaseFlaskTestCase
 
 

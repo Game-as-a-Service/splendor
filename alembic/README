@@ -1,1 +1,20 @@
 Generic single-database configuration.
+```python
+def upgrade():
+    alembic_logger.info("Create Table test.")
+    stm = """
+        CREATE TABLE test (
+            id INT AUTO_INCREMENT PRIMARY KEY COMMENT '流水碼',
+            user_id VARCHAR(100) NOT NULL COMMENT '客戶編號',
+            strategy_name VARCHAR(50) NOT NULL COMMENT '策略名稱',
+            updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '資料異動時間，當update資料時自動更新 CURRENT_TIMESTAMP',
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '資料建立時間，當資料建立時自動設為 CURRENT_TIMESTAMP'
+        );
+    """
+    op.execute(stm)
+
+
+def downgrade():
+    alembic_logger.info("Drop Table test;")
+    op.execute("""DROP TABLE test;""")
+```

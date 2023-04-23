@@ -1,5 +1,41 @@
 # Gem
 
+## 專案架構
+```bash
+.
+├── alembic             # database migration
+│   ├── env.py
+│   ├── README
+│   ├── script.py.mako
+│   └── versions        # migration version
+├── alembic.ini_sample  # database migration config
+├── application                 # api
+├── domain           
+├── interface
+│   ├── api     
+│   ├── open-api-spec   # open api spec
+│   ├── dbmodels
+├── config              # config
+│   └── sample_api_config.py
+├── docker              # docker mysql redis config
+│   ├── mysql-conf
+│   ├── mysql-dumps
+│   └── redis-conf
+├── docker-compose.yaml # docker-compose config
+├── Dockerfile
+├── logs                # log
+├── mainapp.py          # Flask app entry point
+├── tests               # test         
+├── pyproject.toml
+├── README.md
+├── requirements.txt
+├── scripts
+├── setup.cfg
+├── setup.py
+├── start-dev.py
+└── poetry.lock
+```
+
 ## 系統需求
 ### Python
 - Version: >= `3.10`
