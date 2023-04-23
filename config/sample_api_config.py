@@ -39,7 +39,7 @@ class Config:
     USER_DB_PORT = 3306
     USER_DB_USER = "root"
     USER_DB_PWD = "secret"
-    USER_DB_NAME = "user_profile"
+    USER_DB_NAME = "gem"
 
     USER_DATABASE_URI = f"mysql+pymysql://{USER_DB_USER}:{USER_DB_PWD}@{USER_DB_HOST}:{USER_DB_PORT}/{USER_DB_NAME}?charset=utf8mb4"  # noqa: E501
     SQLALCHEMY_POOL_SIZE = 20
