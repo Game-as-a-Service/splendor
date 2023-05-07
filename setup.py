@@ -23,7 +23,7 @@ extras_require = {
 }
 
 setup(
-    name='Gem',
+    name='splendor',
     version='1.0.0',
     python_requires='>=3.10',
     include_package_data=True,

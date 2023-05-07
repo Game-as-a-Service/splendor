@@ -1,10 +1,10 @@
 from requests import Response
 
-from tests.base_flask_test_case import BaseFlaskTestCase
+from domain.bonus import Bonus
+from domain.card import DevelopmentCard
 from domain.player import Player
 from domain.resource import Resource, Token
-from domain.card import DevelopmentCard
-from domain.bonus import Bonus
+from tests.base_flask_test_case import BaseFlaskTestCase
 
 
 class TestHappyCase(BaseFlaskTestCase):

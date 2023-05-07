@@ -66,6 +66,7 @@ class BaseFlaskTestCase(TestCase):
         setattr(cls, "cache", None)
 
     def setUp(self) -> None:
+        # playerA 有4黑token, 0分
         return super().setUp()
 
     def tearDown(self) -> None:

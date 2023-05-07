@@ -1,4 +1,4 @@
-# Gem
+# Splendor
 
 ## 專案架構
 ```bash
@@ -46,17 +46,22 @@
 ```bash
 poetry config virtualenvs.in-project true
 ```
+### 下載專案
+```bash
+git clone https://github.com/Game-as-a-Service/splendor.git
+```
 
 ### 安裝 dependency
 ```bash
-poetry env use python  # 建立專案虛擬環境並使用
 poetry shell  # 啟用虛擬環境，若沒有虛擬環境自動幫你建立並使用
 poetry install  # 依poetry.lock記載的套件版本安裝到虛擬環境中，類似npm install \
-poetry add xxx  # == pip install xxx
-poetry add --group dev xxx  # == pip install in dev
-poetry remove xxx  # == pip uninstall xxx  
 ```
-
+開發過程需要安裝套件
+```bash
+poetry add xxx  # 安裝套件至全部環境
+poetry add --group dev xxx  # 只在開發環境安裝套件
+poetry remove xxx  # 移除套件
+```
 ### 設定檔 Config
 複製 `config/sample_api_config.py` 到 `config/api_config.py`，接著修改 `config/api_config.py` 配置內容
 ```bash
@@ -64,7 +69,7 @@ cp config/sample_api_config.py config/api_config.py
 ```
 
 
-複製  `alembic.ini_sample` 到 `alembic.ini` 並把55行的改成`sqlalchemy.url = mysql+pymysql://root:secret@127.0.0.1:3306/gem`
+複製  `alembic.ini_sample` 到 `alembic.ini` 並把55行的改成`sqlalchemy.url = mysql+pymysql://root:secret@127.0.0.1:3306/splendor`
 ```bash
 cp alembic.ini_sample alembic.ini
 ```
@@ -89,7 +94,6 @@ docker exec -it mysql8 mysql -psecret
 # 退出
 exit
 ```
-
 ### mysql資料庫 migration
 ```bash
 alembic upgrade heads # 進版

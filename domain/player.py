@@ -1,6 +1,6 @@
-from .resource import Resource, Token
 from .bonus import Bonus
 from .card import DevelopmentCard
+from .resource import Resource, Token
 
 
 class Player:
