@@ -110,7 +110,7 @@ docker exec -it mysql8 mysql -psecret
 # 退出
 exit
 ```
-### mysql資料庫 migration
+### mysql資料庫 migration，無須進入container，在專案目錄下執行即可
 ```bash
 alembic upgrade heads # 進版
 ```
