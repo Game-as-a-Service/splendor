@@ -24,9 +24,6 @@ class Config:
     LOG_DISCORD_HOOK_URL = "https://discord.com/api/webhooks/"
     LOG_DISCORD_LEVEL = "WARNING"
 
-    # For Discord Channel
-    DISCORD_TRADINGVIEW_HOOK_URL = "https://discord.com/api/webhooks/"
-
     # CRONJOB SERVER
     CRONJOB_HOST = "127.0.0.1"
     CRONJOB_USER = ""

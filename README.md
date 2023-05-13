@@ -79,7 +79,7 @@ poetry add --group dev xxx  # 只在開發環境安裝套件
 poetry remove xxx  # 移除套件
 ```
 ### 設定檔 Config
-複製 `config/sample_api_config.py` 到 `config/api_config.py`，接著修改 `config/api_config.py` 配置內容
+複製 `config/sample_api_config.py` 到 `config/api_config.py`，接著修改 `config/api_config.py` 配置內容，目前無需修改
 ```bash
 cp config/sample_api_config.py config/api_config.py
 ```
@@ -113,10 +113,13 @@ exit
 ### mysql資料庫 migration
 ```bash
 alembic upgrade heads # 進版
-alembic downgrade base # 回版
+```
+### 如果開發過程需要修改資料庫結構，可以透過下面指令
+```bash
+alembic upgrade heads # 進版 往前到最新版本
+alembic downgrade base # 回版 往後到最舊版本
 alembic revision -m "message" # 產生migration檔案
 ```
-
 ### 啟動專案
 - 方法一指令
 ```bash
