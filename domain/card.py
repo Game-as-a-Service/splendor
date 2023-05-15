@@ -4,7 +4,7 @@ from .resource import Resource
 
 class DevelopmentCard:
     def __init__(
-        self, id: int, level: int, score: int, cost: Resource, bonus: Bonus
+        self, level: int, id: int, score: int, cost: Resource, bonus: Bonus
     ) -> None:
         self.id: int = id
         self.level: int = level

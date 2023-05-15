@@ -1,4 +1,3 @@
-from pydoc import plain
 from requests import Response
 from domain.noble import Noble
 
@@ -9,7 +8,7 @@ from domain.resource import Resource, Token
 from domain.card import DevelopmentCard
 from typing import List
 
-class TestApiHome(BaseFlaskTestCase):
+class BaseDomain(BaseFlaskTestCase):
     level1: List[DevelopmentCard]
     level2: List[DevelopmentCard]
     level3: List[DevelopmentCard]
@@ -23,14 +22,7 @@ class TestApiHome(BaseFlaskTestCase):
 
     def tearDown(self) -> None:
         return super().tearDown()
-
-    def test_it_should_200_when_api_is_alive(self):
-        """API狀態正常，應該回應200"""
-        with self.app.test_client() as client:
-            res: Response = client.get("/")
-            self.assertEqual(200, res.status_code)
-            self.assertEqual("API is alive.", res.json["message"])
-            
+    
     def getCards(self,level:int,id:int)->DevelopmentCard:
         if level ==1:
             return list(filter(lambda c: c.id == id, self.level1))[0]
@@ -51,11 +43,16 @@ class TestApiHome(BaseFlaskTestCase):
             for i in id:
                 cards.append(list(filter(lambda c: c.id == i, self.level3))[0])
         return cards
+    
+    def getNoble(self,id:int)->Noble:
+        return list(filter(lambda c: c.id == id, self.nobes))[0]
 
     def playerGetdevelopment_cards(self,cards:List[DevelopmentCard],player:Player):
         for card in cards:
             player.appendCard(card)
 
+    def playerGetNoble(self,noble:Noble,player:Player):
+            player.appendNoble(noble)
 
 
     def _getLevel1(self):        
@@ -69,7 +66,7 @@ class TestApiHome(BaseFlaskTestCase):
                     DevelopmentCard(1, 7, 0, Resource(2, 2, 0, 1, 0),  Bonus(onyx=1)),
                     DevelopmentCard(1, 8, 0, Resource(1, 0, 2, 2, 0),  Bonus(sapphire=1)),
                     DevelopmentCard(1, 9, 0, Resource(0, 0, 1, 3, 1),  Bonus(onyx=1)),
-                    DevelopmentCard(1, 10, 0, Resource(0, 0, 0, 0, 4),  Bonus(emerald=1)),
+                    DevelopmentCard(1, 10, 1, Resource(0, 0, 0, 0, 4),  Bonus(emerald=1)),
                     DevelopmentCard(1, 11, 0, Resource(1, 1, 0, 1, 2),  Bonus(emerald=1)),
                     DevelopmentCard(1, 12, 0, Resource(2, 0, 1, 0, 2),  Bonus(ruby=1)),
                     DevelopmentCard(1, 13, 0, Resource(3, 0, 0, 0, 0),  Bonus(ruby=1)),

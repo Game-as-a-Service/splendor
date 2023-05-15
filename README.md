@@ -120,7 +120,7 @@ alembic revision -m "message" # 產生migration檔案
 ### 啟動專案
 - 方法一指令
 ```bash
-export FLASK_APP=mainapp.py
+set FLASK_APP=mainapp.py
 flask run
 ```
 - 方法二vscode launch.json

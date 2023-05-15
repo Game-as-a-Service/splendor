@@ -38,7 +38,7 @@ class BaseFlaskTestCase(TestCase):
         cls.app.logger.setLevel("ERROR")
         cls.container = cls.app.extensions["container"]
         cls.cache: BaseCache = cls.container.provide("cache")
-        cls.cache.clear()
+        #cls.cache.clear()
 
         user_engine = create_engine(
             cls.app.config["USER_DATABASE_URI"],
@@ -55,7 +55,7 @@ class BaseFlaskTestCase(TestCase):
         if cls.user_sql_session:
             cls.user_sql_session.close_all()
 
-        cls.cache.clear()
+        #cls.cache.clear()
 
         setattr(cls, "app", None)
         setattr(cls, "app_context", None)
