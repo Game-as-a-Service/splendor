@@ -28,7 +28,7 @@ class BuyDevelopent(BaseDomain):
         #       1.初始Bonus(41233)
         #       2.初始Token(101110)
         #       3.table level1[20,21,25,24]
-        g =self.turn1_Init()
+        g =self.turn1_init()
         #when 購買1.24號牌
         p1 = g.players[0]
         buyCard =g.table.getCards(1,25)
@@ -48,7 +48,7 @@ class BuyDevelopent(BaseDomain):
         #       1.初始Bonus(41233)
         #       2.初始Token(101110)
         #       3.table level1[20,21,25,24]
-        g =self.turn1_Init()
+        g =self.turn1_init()
         #when 購買1.24號牌
         p1 = g.players[0]
         buyCard =g.table.getCards(1,25)
@@ -67,7 +67,7 @@ class BuyDevelopent(BaseDomain):
         #       1.初始Bonus(41233)
         #       2.初始Token(101110)
         #       3.table level1[20,21,25,24]
-        g =self.turn1_Init()
+        g =self.turn1_init()
         #when 購買1.24號牌
          #when 購買1.24號牌
         p1 = g.players[0]
@@ -85,7 +85,7 @@ class BuyDevelopent(BaseDomain):
         #       1.初始Bonus(41233)
         #       2.初始Token(101110)
         #       3.table level1[20,21,25,24]
-        g =self.turn1_Init()
+        g =self.turn1_init()
         #when 購買1.24號牌
         p1 = g.players[0]
         buyCard =g.table.getCards(1,25)
@@ -103,7 +103,7 @@ class BuyDevelopent(BaseDomain):
     def test_buydevelopment_usercase02(self):
         #given 玩家一 
         #       玩家購買場面上卡片後
-        g =self.turn1_Init()
+        g =self.turn1_init()
         p1 = g.players[0]
         buyCard =g.table.getCards(1,25)
         p1.buyDevelopmentCard(Resource(emerald=1),buyCard)
@@ -116,7 +116,7 @@ class BuyDevelopent(BaseDomain):
     def test_buydevelopment_usercase03_gainnoble(self):
         #given 玩家一 
         #       Bonus被更新為(41234)
-        g =self.turn1_Init()
+        g =self.turn1_init()
         p1 = g.players[0]
         buyCard =g.table.getCards(1,25)
         p1.buyDevelopmentCard(Resource(emerald=1),buyCard)
@@ -131,7 +131,7 @@ class BuyDevelopent(BaseDomain):
     def test_buydevelopment_usercase03_tablecheck(self):
         #given 玩家一 
         #       Bonus被更新為(41234)
-        g =self.turn1_Init()
+        g =self.turn1_init()
         p1 = g.players[0]
         buyCard =g.table.getCards(1,25)
         p1.buyDevelopmentCard(Resource(emerald=1),buyCard)
@@ -144,7 +144,7 @@ class BuyDevelopent(BaseDomain):
     def test_buydevelopment_usercase04(self):
         #given 玩家一 
         #       Bonus被更新為(41234)
-        g =self.turn1_Init()
+        g =self.turn1_init()
         p1 = g.players[0]
         buyCard =g.table.getCards(1,25)
         p1.buyDevelopmentCard(Resource(emerald=1),buyCard)
@@ -156,7 +156,7 @@ class BuyDevelopent(BaseDomain):
         self.assertEqual(10, p1.score)
 
 
-    def turn1_Init(self)->Game:
+    def turn1_init(self)->Game:
         g =Game()
         #level1 table
         g.table.level1[0] =super().getCards(1,20)

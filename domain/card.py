@@ -1,5 +1,5 @@
 from .bonus import Bonus
-from .resource import Resource
+from .resource import Resource,Token
 
 
 class DevelopmentCard:
@@ -10,4 +10,4 @@ class DevelopmentCard:
         self.level: int = level
         self.score: int = score
         self.cost: Resource = cost
-        self.bonus: Bonus = bonus
+        self.bonus: Token = bonus
