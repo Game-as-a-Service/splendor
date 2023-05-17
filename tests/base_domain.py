@@ -159,6 +159,7 @@ class BaseDomain(BaseFlaskTestCase):
                     DevelopmentCard(3, 20, 5, Resource(7, 3, 0, 0, 0),  Bonus(sapphire=1)),
         ]
         return level
+        
     
     def _getNobes(self):
         nobles: List[Noble]= [
