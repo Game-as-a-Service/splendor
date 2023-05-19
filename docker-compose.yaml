@@ -10,6 +10,7 @@ services:
     volumes:
       - ./docker/mysql-dumps:/docker-entrypoint-initdb.d
       - ./docker/mysql-conf/mysqld.cnf:/etc/mysql/conf.d/mysqld.cnf
+      - ./docker/mysql-logs:/var/log/mysql
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: splendor

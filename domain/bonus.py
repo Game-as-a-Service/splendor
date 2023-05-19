@@ -18,5 +18,3 @@ class Bonus:
             self.ruby += 1
         elif bonus==Token.onyx:
             self.onyx += 1
-
-

@@ -8,7 +8,6 @@ from dbmodels.user_profile.user_info import UserInfo
 from interface.api.common.datetime_utils import date_to_str
 from interface.api.common.error import InvalidInvocation
 
-
 class UserInfoService:
     def __init__(self, user_sql_session: Session) -> None:
         self._user_sql_session = user_sql_session

@@ -1,0 +1,5 @@
+[mysqld]
+
+general_log = 1
+general_log_file = C:/Docker/mysql_log/general.log
+log_error = C:/Docker/mysql_log/error.log

@@ -12,7 +12,7 @@ class Player:
         self.development_cards: list[DevelopmentCard] = []
         self.reserveDevelopmentCards: list[DevelopmentCard] = []
         self.bonus: Bonus = Bonus()
-        self.nobles:list[Noble]=[]
+        self.nobles:list[Noble]=[]        
 
     def buyDevelopmentCard(self, cost: Resource, card: DevelopmentCard):
         if self.canBuy(cost,card):
@@ -42,6 +42,12 @@ class Player:
             total+=noble.score
         self.score =total
 
+    def setBonus(self):
+        newBonus =Bonus()
+        for b in self.development_cards:
+            newBonus.gain(b.bonus)
+        return newBonus
+
     def canBuy(self,cost: Resource, card: DevelopmentCard)->bool:
         diamond = card.cost.diamond -self.bonus.diamond-cost.diamond
         ruby = card.cost.ruby -self.bonus.ruby-cost.ruby
@@ -59,4 +65,14 @@ class Player:
         else:
             return False
 
+
+    def to_dict(self):
+        return {
+            'score': self.score,
+            'resource': self.resource.to_dict(),
+            'development_cards': [card.to_dict() for card in self.development_cards],
+            'reserveDevelopmentCards': [card.to_dict() for card in self.reserveDevelopmentCards],
+            'bonus': self.bonus.__dict__,
+            'nobles': [noble.to_dict() for noble in self.nobles]
+        }
 

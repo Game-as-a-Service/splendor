@@ -28,7 +28,6 @@ def upgrade():
     """
     op.execute(stm)
 
-
 def downgrade():
     alembic_logger.info("Drop Table user_info;")
     op.execute("""DROP TABLE user_info;""")

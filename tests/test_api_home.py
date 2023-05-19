@@ -8,6 +8,9 @@ from domain.player import Player
 from domain.resource import Resource, Token
 from domain.card import DevelopmentCard
 from typing import List
+from interface.repository.mySQL.game.nobe_repository import NobeRepository
+
+from application.play_action import PlayAction
 
 class TestApiHome(BaseFlaskTestCase):
     level1: List[DevelopmentCard]
@@ -178,3 +181,4 @@ class TestApiHome(BaseFlaskTestCase):
 
         ]
         return nobles
+    

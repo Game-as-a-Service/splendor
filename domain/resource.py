@@ -46,6 +46,26 @@ class Resource:
             self.token.remove(i)
         self.setResource()
 
+    def to_dict(self):
+        return {
+            'diamond': self.diamond,
+            'sapphire': self.sapphire,
+            'emerald': self.emerald,
+            'ruby': self.ruby,
+            'onyx': self.onyx,
+            'gold': self.gold,
+        }
+
+    def to_dict_cost(self):
+        return {
+            'diamond': self.diamond,
+            'sapphire': self.sapphire,
+            'emerald': self.emerald,
+            'ruby': self.ruby,
+            'onyx': self.onyx,
+        }
+
+
 
 class Token(Enum):
     diamond = "diamond"#鑽石    

@@ -18,7 +18,7 @@ class BuyDevelopent(BaseDomain):
     #       1.初始Bonus(41233)
     #       2.初始Token(101110)
     #       3.table level1[20,21,25,24]
-    #when 購買1.24號牌 
+    #when 購買1.25號牌 
     #then 1.玩家獲得1.25號牌        GainCard
     #     2.桌面上1.25號牌已不存在   DeckChange
     #     3.結果Bonus(41233)        SelfBonus
@@ -29,7 +29,7 @@ class BuyDevelopent(BaseDomain):
         #       2.初始Token(101110)
         #       3.table level1[20,21,25,24]
         g =self.turn1_init()
-        #when 購買1.24號牌
+        #when 購買1.25號牌
         p1 = g.players[0]
         buyCard =g.table.getCards(1,25)
         p1.buyDevelopmentCard(Resource(emerald=1),buyCard)
@@ -49,7 +49,7 @@ class BuyDevelopent(BaseDomain):
         #       2.初始Token(101110)
         #       3.table level1[20,21,25,24]
         g =self.turn1_init()
-        #when 購買1.24號牌
+        #when 購買1.25號牌
         p1 = g.players[0]
         buyCard =g.table.getCards(1,25)
         p1.buyDevelopmentCard(Resource(emerald=1),buyCard)
@@ -68,8 +68,8 @@ class BuyDevelopent(BaseDomain):
         #       2.初始Token(101110)
         #       3.table level1[20,21,25,24]
         g =self.turn1_init()
-        #when 購買1.24號牌
-         #when 購買1.24號牌
+        #when 購買1.25號牌
+         #when 購買1.25號牌
         p1 = g.players[0]
         buyCard =g.table.getCards(1,25)
         p1.buyDevelopmentCard(Resource(emerald=1),buyCard)
@@ -86,7 +86,7 @@ class BuyDevelopent(BaseDomain):
         #       2.初始Token(101110)
         #       3.table level1[20,21,25,24]
         g =self.turn1_init()
-        #when 購買1.24號牌
+        #when 購買1.25號牌
         p1 = g.players[0]
         buyCard =g.table.getCards(1,25)
         p1.buyDevelopmentCard(Resource(emerald=1),buyCard)
@@ -108,7 +108,7 @@ class BuyDevelopent(BaseDomain):
         buyCard =g.table.getCards(1,25)
         p1.buyDevelopmentCard(Resource(emerald=1),buyCard)
         #when:
-        #       1.24號牌被購買,系統補牌        
+        #       1.25號牌被購買,系統補牌        
         g.table.reissueCard()
         #then   1.3.table level1變成[20,21,26,24]
         self.assertEqual(26,g.table.level1[2].id)

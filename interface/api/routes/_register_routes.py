@@ -3,6 +3,7 @@ from flask_restful import Api
 
 from config.api_config import Config
 from interface.api.routes.account.api_user_profile import ApiUserProfile
+from interface.api.routes.game import ApiPlayerProfile,ApiPlayerBuyCardByTable
 from interface.api.routes.api_home import ApiHome
 from interface.api.routes.api_preview import ApiPreview
 from interface.api.routes.open_api_spec import OpenApiSpec
@@ -23,3 +24,9 @@ def setup_routes(app: Flask):
 
     # User 相關
     api.add_resource(ApiUserProfile, "/user", "/user/<user_id>")
+    api.add_resource(ApiPlayerProfile, "/player")
+    api.add_resource(ApiPlayerBuyCardByTable, "/player/buycard/1")
+    api.add_resource(ApiPlayerProfile, "/player/buycardbydeck", endpoint="buycardbydeck")
+
+
+

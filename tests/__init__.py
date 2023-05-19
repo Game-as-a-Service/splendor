@@ -1,5 +1,6 @@
 from flask.testing import FlaskClient
 
+
 guest_user = None
 guest_email = None
 guest_type = None

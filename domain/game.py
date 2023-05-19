@@ -9,7 +9,7 @@ from typing import List
 
 class Game():
     def __init__(self) -> None:
-        self.id =uuid.UUID("05d50d5d-4b64-4df7-bc40-334fffdf8102")
+        self.id =''
         self.status= Status.progressing
         self.table = Table()
         self.players:List[Player] = []
@@ -18,6 +18,7 @@ class Game():
 
     def add_player(self, player:Player):
         self.players.append(player)
+
     def getToken(self, player:Player,res:Resource):
         player.resource.appendToken(res.token)
         self.table.resource.removeToken(res.token)    
