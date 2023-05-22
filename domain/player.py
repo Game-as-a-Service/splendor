@@ -1,4 +1,3 @@
-
 from .bonus import Bonus
 from .card import DevelopmentCard
 from .resource import Resource, Token
@@ -12,22 +11,22 @@ class Player:
         self.development_cards: list[DevelopmentCard] = []
         self.reserveDevelopmentCards: list[DevelopmentCard] = []
         self.bonus: Bonus = Bonus()
-        self.nobles:list[Noble]=[]   
+        self.nobles: list[Noble] = []
 
-    def get_token(self,resource: Resource)->None:
-        pass     
-
-    def buy_development_card(self, cost: Resource, card: DevelopmentCard)->None:
+    def get_token(self, resource: Resource) -> None:
         pass
 
-    def reserve_development_card(self,card:DevelopmentCard)->None:
-        pass
-            
-    def gain_permanent_token()->None:
+    def buy_development_card(self, cost: Resource, card: DevelopmentCard) -> None:
         pass
 
-    def gain_score()->None:
+    def reserve_development_card(self, card: DevelopmentCard) -> None:
         pass
 
-    def gain_noble()->None:
+    def gain_permanent_token() -> None:
+        pass
+
+    def gain_score() -> None:
+        pass
+
+    def gain_noble() -> None:
         pass
