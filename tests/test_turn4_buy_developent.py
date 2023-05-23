@@ -188,7 +188,7 @@ class BuyDevelopent(BaseDomain):
         #when game.is_last_round
         g.is_last_round()
         #then
-        self.assertEqual(True,g.isLastRound)
+        self.assertEqual("lastRound",g.status.value)
 
     def test_buydevelopment_usercase12_whoswinner(self):
         #Given

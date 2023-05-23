@@ -11,4 +11,5 @@ class GameInfo(Base):
 
     game_id = Column(String(36, "utf8mb4_unicode_ci"), primary_key=True, comment="遊戲編號")
     status = Column(String(10, "utf8mb4_unicode_ci"), nullable=False, comment="遊戲狀態(processing,end)")
-
+    turn = Column(String(36, "utf8mb4_unicode_ci"), nullable=False, comment="輪到誰")
+    whos_winner = Column(String(36, "utf8mb4_unicode_ci"), nullable=True, comment="勝利玩家")

@@ -19,5 +19,5 @@ class PlayerNobleInfo(Base):
         return cls(
             game_id =game_id,
             player_id =player_id,
-            id=noble.id,
+            noble_id=noble.id,
         )

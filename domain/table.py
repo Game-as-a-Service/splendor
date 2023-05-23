@@ -1,4 +1,3 @@
-from importlib.metadata import SelectableGroups
 from typing import List
 from .resource import Resource, Token
 from .card import DevelopmentCard
@@ -11,9 +10,10 @@ class Table:
         self.deck2:List[DevelopmentCard]  = Table_init._getLevel2()
         self.deck3:List[DevelopmentCard]  = Table_init._getLevel3()
         self.nobles :List[Noble] =Table_init._getNobes(5)
-        self.level1 = {0: None, 1: None, 2: None, 3: None}
-        self.level2 = {0: None, 1: None, 2: None, 3: None}
-        self.level3 = {0: None, 1: None, 2: None, 3: None}
+        self.level1 : dict[int,DevelopmentCard] = {}
+        self.level2 : dict[int,DevelopmentCard] = {}
+        self.level3 : dict[int,DevelopmentCard] = {}
+
     
     def getCards(self, level: int, id: int) -> DevelopmentCard:
         if level == 1:

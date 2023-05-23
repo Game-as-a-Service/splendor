@@ -19,3 +19,4 @@ class DevelopmentCardInfo(Base):
     ruby = Column(Integer, nullable=False, comment="紅寶石")
     onyx = Column(Integer, nullable=False, comment="瑪瑙")
     bonus = Column(String(10, "utf8mb4_unicode_ci"), nullable=False, comment="獲得寶石")
+

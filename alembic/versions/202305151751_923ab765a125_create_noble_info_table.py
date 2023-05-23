@@ -164,7 +164,9 @@ def upgrade():
     stm = """
         CREATE TABLE game_info (
             game_id varchar(36) NOT NULL COMMENT '遊戲編號',
-            status varchar(10) NOT NULL COMMENT '遊戲狀態(processing,end)',
+            status varchar(10) NOT NULL COMMENT '遊戲狀態(processing,lastRound,end)',
+            turn varchar(36) NOT NULL COMMENT '輪到誰',
+            whos_winner varchar(36) COMMENT '勝利玩家',
             PRIMARY KEY (game_id));
     """
     op.execute(stm)
@@ -182,6 +184,11 @@ def upgrade():
             ruby int NOT NULL COMMENT '紅寶石',
             onyx int NOT NULL COMMENT '瑪瑙',
             gold int NOT NULL COMMENT '黃金',
+            bonus_diamond int NOT NULL COMMENT '永久鑽石',
+            bonus_sapphire int NOT NULL COMMENT '永久藍寶石',
+            bonus_emerald int NOT NULL COMMENT '永久綠寶石',
+            bonus_ruby int NOT NULL COMMENT '永久紅寶石',
+            bonus_onyx int NOT NULL COMMENT '永久瑪瑙',
             PRIMARY KEY (game_id,player_id));
     """
     op.execute(stm)

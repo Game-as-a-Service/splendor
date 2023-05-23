@@ -7,14 +7,13 @@ from .player import Player
 from .resource import Resource,Token
 from typing import List
 
-class Game():
+class Game:
     def __init__(self) -> None:
-        self.id =''
+        self.id :str
         self.status= Status.progressing
         self.table = Table()
         self.players:List[Player] = []
-        self.isLastRound :bool =False
-        self.whosWinner :Player
+        self.whosWinner :str
 
     def add_player(self, player:Player):
         self.players.append(player)
@@ -25,7 +24,7 @@ class Game():
 
     def is_last_round(self):
         if len(list(filter(lambda p:p.score>=15 ,self.players)))  >0:
-            self.isLastRound =True
+            self.status = Status.lastRound
 
     def whos_Winner(self):
         self.whosWinner=max(self.players, key=lambda p: p.score)

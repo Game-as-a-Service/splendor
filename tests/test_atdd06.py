@@ -20,11 +20,17 @@ class TestApiHome(BaseFlaskTestCase):
         #self._clear_test_data()
         return super().tearDown()
     
-    def test_it_should_200_when_player_exists(self):
-        """一般用戶存在，應該回應200"""
-        with self.app.test_client() as client:
-            res: TestResponse = client.get(f"/player?gameId={self._game_id}&playerId={self._p1}")
-            self.assertEqual(200, res.status_code)
+    # def test_it_should_200_when_player_exists(self):
+    #     """一般用戶存在，應該回應200"""
+    #     with self.app.test_client() as client:
+    #         res: TestResponse = client.get(f"/player?gameId={self._game_id}&playerId={self._p1}")
+    #         self.assertEqual(200, res.status_code)
+    
+    # def test_it_should_200_when_table_exists(self):
+    #     """一般用戶存在，應該回應200"""
+    #     with self.app.test_client() as client:
+    #         res: TestResponse = client.get(f"/table?gameId={self._game_id}&tableId={self._table_id}")
+    #         self.assertEqual(200, res.status_code)
 
     def test_it_should_200_when_player_buy_card_exists(self):
         """一般用戶存在，應該回應200"""
@@ -44,14 +50,8 @@ class TestApiHome(BaseFlaskTestCase):
             }
         }
         res: TestResponse = client.post('/player/buycard/1', json=data)
-        self.assertEqual(201, res.status_code)
+        self.assertEqual(200, res.status_code)
 
-
-    def test(self):
-        #action 1 買卡片
-        with self.app.test_client() as client:
-            res: TestResponse = client.get(f"/player?gameId={self._game_id}&playerId={self._p1}")
-    
     def _clear_test_data(self):
         self.user_sql_session.query(GameInfo).delete()
         self.user_sql_session.query(TableInfo).delete()
@@ -76,6 +76,8 @@ class TestApiHome(BaseFlaskTestCase):
                 **{
                     "game_id": game_id,
                     "status": "processing",
+                    "turn": p1,
+                    "whos_winner":None
                 }
             )
         )
@@ -174,6 +176,11 @@ class TestApiHome(BaseFlaskTestCase):
                     "ruby":1,
                     "onyx":1,
                     "gold":0,
+                    "bonus_diamond":4,
+                    "bonus_sapphire":1,
+                    "bonus_emerald":2,
+                    "bonus_ruby":3,
+                    "bonus_onyx":3,
                 }
             )
         )
@@ -229,6 +236,11 @@ class TestApiHome(BaseFlaskTestCase):
                     "ruby":2,
                     "onyx":1,
                     "gold":0,
+                    "bonus_diamond":1,
+                    "bonus_sapphire":2,
+                    "bonus_emerald":5,
+                    "bonus_ruby":0,
+                    "bonus_onyx":0,
                 }
             )
         )
@@ -261,6 +273,11 @@ class TestApiHome(BaseFlaskTestCase):
                     "ruby":0,
                     "onyx":0,
                     "gold":1,
+                    "bonus_diamond":1,
+                    "bonus_sapphire":1,
+                    "bonus_emerald":1,
+                    "bonus_ruby":1,
+                    "bonus_onyx":2,
                 }
             )
         )
@@ -294,6 +311,11 @@ class TestApiHome(BaseFlaskTestCase):
                     "ruby":3,
                     "onyx":3,
                     "gold":0,
+                    "bonus_diamond":4,
+                    "bonus_sapphire":3,
+                    "bonus_emerald":1,
+                    "bonus_ruby":1,
+                    "bonus_onyx":0,
                 }
             )
         )

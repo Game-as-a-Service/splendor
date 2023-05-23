@@ -1,14 +1,14 @@
 from enum import Enum
 
 class Resource:
-    def __init__(self,diamond=0, sapphire=0, emerald=0,ruby=0, onyx=0,gold=0) -> None:
+    def __init__(self,diamond:int=0, sapphire:int=0, emerald:int=0,ruby:int=0, onyx:int=0,gold:int=0) -> None:
         self.token: list[Token] = []
-        self.diamond: int = 0        
-        self.sapphire: int = 0
-        self.emerald: int = 0
-        self.ruby: int = 0
-        self.onyx: int = 0
-        self.gold: int = 0
+        self.diamond = 0        
+        self.sapphire = 0
+        self.emerald = 0
+        self.ruby = 0
+        self.onyx = 0
+        self.gold = 0
         for _ in range(diamond):
             self.token.append(Token.diamond)
         for _ in range(sapphire):
