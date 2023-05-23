@@ -21,8 +21,6 @@ class PlayerRepository:
     def __init__(self, user_sql_session: Session) -> None:
         self._user_sql_session = user_sql_session
         
-        
-
     def get_player_by_id(self, game_id: str, player_id: str) -> PlayerUserCase:
         player_info =self.get_player_info_by_id(game_id,player_id)
 
@@ -57,7 +55,3 @@ class PlayerRepository:
         return(self._user_sql_session.query(PlayerInfo)
                       .filter(PlayerInfo.game_id == game_id,PlayerInfo.player_id == player_id)
                       .first())
-    
-    
-    def get_card(self,level:int,id:int)->DevelopmentCardUserCase:
-        return DevelopmentCardRepository.get_development_card_info_by_id(self,level,id)

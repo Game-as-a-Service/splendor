@@ -13,7 +13,6 @@ class DevelopmentCardRepository:
     def __init__(self, user_sql_session: Session) -> None:
         self._user_sql_session = user_sql_session
     
-    @staticmethod
     def get_development_card_info_by_id(self,level:int,id:int)-> DevelopmentCardUserCase:    
         query =(self._user_sql_session.query(DevelopmentCardInfo)
                 .filter(DevelopmentCardInfo.level == level ,
