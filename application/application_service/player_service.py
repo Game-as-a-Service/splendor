@@ -12,16 +12,17 @@ from interface.api.common.error import InvalidInvocation
 from interface.api.common.response_utils import api_response
 from interface.api.containers.decorator import inject_service
 
-from interface.repository.mySQL.game import Repository
+from interface.repository.mySQL.game import PlayerRepository,DevelopmentCardRepository
 from ..user_case import *
 
 class PlayerService:
     @inject_service()
     def __init__(self,
-                 repository:Repository)->None:        
-        self._player_repository =repository._player_repository
-        self._development_card_repository =repository._development_card_repository
-        self._table_repository = repository._table_repository
+                 player_repository:PlayerRepository,
+                 development_card_repository:DevelopmentCardRepository)->None:        
+        self._player_repository =player_repository
+        self._development_card_repository =development_card_repository
+
 
         #查
     def get_player_info(self,game_id:str,player_id:str)->dict:

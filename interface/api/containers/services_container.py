@@ -11,6 +11,7 @@ from pinject.object_providers import ObjectProvider
 
 from interface.api.containers.decorator import set_service_graph
 from interface.api.containers.services_spec import BindingSpec, service_classes
+from typing import List
 
 T = TypeVar("T")
 
@@ -34,8 +35,8 @@ class ServicesContainer:
         self.service_graph = create_service_graph(app)
         return self
 
-    def provide_instance(self, cls: Type[T]) -> T:
-        return self.service_graph.provide(cls)
+    def provide_instance(self, classes: List[Type[T]]) -> List[T]:
+        return [self.service_graph.provide(cls) for cls in classes]
 
     def provide(self, name: str):
         return get_binding_instance_from_object_graph(self.service_graph, name)

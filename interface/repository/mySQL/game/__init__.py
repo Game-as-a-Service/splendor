@@ -1,1 +1,2 @@
-from .repository import Repository
+from .player_repository import PlayerRepository
+from .development_card_repository import DevelopmentCardRepository
