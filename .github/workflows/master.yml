@@ -31,8 +31,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        env:
-          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
 
     steps:
       - name: Checkout code
@@ -52,9 +50,8 @@ jobs:
       - name: Alembic upgrade heads
         run: poetry run alembic -c alembic.ini upgrade heads
 
-      - name: Set Redis Password Output
-        id: set_redis_password
-        run: echo "::set-output name=redis_password::${{ secrets.REDIS_PASSWORD }}"
+      - name: Check Docker Containers
+        run: docker ps
 
 
   test:
