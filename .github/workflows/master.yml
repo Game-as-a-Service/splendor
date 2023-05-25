@@ -50,10 +50,6 @@ jobs:
       - name: Alembic upgrade heads
         run: poetry run alembic -c alembic.ini upgrade heads
 
-      - name: Check Docker Containers
-        run: docker ps
-
-
   test:
     needs: build
     runs-on: ubuntu-latest
@@ -72,6 +68,9 @@ jobs:
 
       - name: Install dependencies
         run: poetry install
+      
+      - name: Check Docker Containers
+        run: docker ps
 
       - name: Poetry run pytest
         run: poetry run pytest
