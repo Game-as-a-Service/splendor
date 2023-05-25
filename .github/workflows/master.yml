@@ -56,7 +56,7 @@ jobs:
           echo "$(ls)"
           docker ps
           docker ps -a
-          docker exec -it redis6 ls /usr/local/etc/redis
+          docker exec -it redis:6 ls /usr/local/etc/redis
           echo "requirepass $REDIS_PASSWORD" > redis.conf 
           docker cp redis.conf redis6:/usr/local/etc/redis/redis.conf 
         env:
