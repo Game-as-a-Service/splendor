@@ -1,0 +1,55 @@
+name: master
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0.26
+        env:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: splendor
+        ports:
+          - 3306:3306
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 3
+
+      redis:
+        image: redis:6
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-docker@v1
+
+      - name: Start database containers
+        run: docker-compose up -d
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11.1'
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run tests
+        run: pytest
+
+      - name: Stop database containers
+        run: docker-compose down
