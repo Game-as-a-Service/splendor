@@ -19,3 +19,4 @@ class Table:
 
     def replenish_card(self,level:int)->None:
         pass
+    
