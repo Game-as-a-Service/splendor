@@ -52,6 +52,9 @@ jobs:
       - name: Alembic upgrade heads
         run: poetry run alembic -c alembic.ini upgrade heads
 
+      - name: Print Redis Password
+        run: echo ${{ secrets.REDIS_PASSWORD }}
+
   test:
     needs: build
     runs-on: ubuntu-latest
