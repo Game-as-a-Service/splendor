@@ -26,8 +26,7 @@ jobs:
         image: redis:6
         ports:
           - 6379:6379
-        env:
-          REDIS_PASSWORD: secret
+        entrypoint: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
 
     steps:
       - name: Checkout code
