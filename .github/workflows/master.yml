@@ -31,8 +31,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        env:
-          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+        command: ["redis-server", "--requirepass", "${{ secrets.REDIS_PASSWORD }}"]
 
     steps:
       - name: Checkout code
@@ -54,6 +53,13 @@ jobs:
 
       - name: Check Docker Containers
         run: docker ps
+        
+      - name: Wait for Redis to start
+        run: sleep 10
+
+      - name: Configure Redis password
+        run: redis-cli -h localhost -p 6379 -a "${{ secrets.REDIS_PASSWORD }}" config set requirepass "${{ secrets.REDIS_PASSWORD }}"
+
 
       - name: Poetry run pytest
         run: poetry run pytest
