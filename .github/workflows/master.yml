@@ -26,13 +26,13 @@ jobs:
         image: redis:6
         ports:
           - 6379:6379
-        options: >-
+         options: >-
           --health-cmd "redis-cli ping"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
         env:
-          REDIS_PASSWORD: secret
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
 
     steps:
       - name: Checkout code
