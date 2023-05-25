@@ -52,7 +52,7 @@ class Config:
     SESSION_COOKIE_HTTPONLY = True
     SESSION_KEY_PREFIX = f"{ENV_SET}-splendor-session:"
     SESSION_REDIS_HOST = "localhost"
-    SESSION_REDIS_PASSWORD = "secret"
+    SESSION_REDIS_PASSWORD = ""
     SESSION_REDIS_PORT = "6379"
     SESSION_REDIS_DB = 9
     SESSION_REDIS_SSL = False
