@@ -31,9 +31,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Start database containers
-        run: docker-compose up -d
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -50,6 +47,3 @@ jobs:
         
       - name: Poetry run pytest
         run: poetry run pytest
-
-      - name: Stop database containers
-        run: docker-compose down
