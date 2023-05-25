@@ -52,7 +52,8 @@ jobs:
 
       - name: Set Redis password
         run: |
-          echo "requirepass $REDIS_PASSWORD" > redis.conf  
+          pws
+          ls 
           docker cp redis.conf redis6:/usr/local/etc/redis/redis.conf  
         env:
           REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}  
