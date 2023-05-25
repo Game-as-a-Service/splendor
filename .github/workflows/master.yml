@@ -31,6 +31,9 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        volumes:
+          - ./docker/redis-conf:/usr/local/etc/redis
+        entrypoint: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
 
     steps:
       - name: Checkout code
@@ -49,18 +52,6 @@ jobs:
 
       - name: Alembic upgrade heads
         run: poetry run alembic -c alembic.ini upgrade heads
-
-      - name: Check Docker Containers
-        run: docker ps
-
-      - name: Wait for Redis to start
-        run: sleep 10
-      
-      - name: Install redis cli # so we can test the server
-        run: sudo apt-get install -y redis-tools
-
-      - name: Verify that redis is up
-        run: redis-cli ping
 
       - name: Poetry run pytest
         run: poetry run pytest
