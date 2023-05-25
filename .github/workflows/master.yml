@@ -26,9 +26,17 @@ jobs:
         image: redis:6
         ports:
           - 6379:6379
-        entrypoint: redis-server --requirepass secret
 
     steps:
+      - name: Start Redis server
+        run: redis-server --requirepass secret &
+      
+      - name: Wait for Redis to start
+        run: |
+          sleep 5
+          until redis-cli -h localhost -p 6379 ping; do
+            sleep 1
+          done
       - name: Checkout code
         uses: actions/checkout@v2
 
