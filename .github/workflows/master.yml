@@ -52,14 +52,14 @@ jobs:
 
       - name: Set Redis password
         run: |
-          pws
-          ls 
-          docker cp redis.conf redis6:/usr/local/etc/redis/redis.conf  
+          echo "Current directory: $(pwd)"
+          echo "requirepass $REDIS_PASSWORD" > redis.conf 
+          docker cp redis.conf redis6:/usr/local/etc/redis/redis.conf 
         env:
-          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}  
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
 
       - name: Start Redis
-        run: docker exec redis6 redis-server /usr/local/etc/redis/redis.conf  
+        run: docker exec redis6 redis-server /usr/local/etc/redis/redis.conf 
 
 
       - name: Alembic upgrade heads
