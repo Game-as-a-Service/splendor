@@ -43,7 +43,8 @@ jobs:
         run: poetry install
 
       - name: Alembic upgrade heads
-        run: poetry run alembic upgrade heads # 進版     
+        run: poetry run alembic -c alembic.ini upgrade heads
+
         
       - name: Poetry run pytest
         run: poetry run pytest
