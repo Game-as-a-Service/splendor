@@ -55,6 +55,11 @@ jobs:
 
       - name: Wait for Redis to start
         run: sleep 10
+      
+      - name: Install redis-server
+        run: |
+          pip install redis-server
+
 
       - name: Run Redis Server
         run: |
