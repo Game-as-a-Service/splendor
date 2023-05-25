@@ -31,6 +31,9 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        env:
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}  
+
 
     steps:
       - name: Checkout code
@@ -46,6 +49,17 @@ jobs:
 
       - name: Install dependencies
         run: poetry install
+
+      - name: Set Redis password
+        run: |
+          echo "requirepass $REDIS_PASSWORD" > redis.conf  
+          docker cp redis.conf redis6:/usr/local/etc/redis/redis.conf  
+        env:
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}  
+
+      - name: Start Redis
+        run: docker exec redis6 redis-server /usr/local/etc/redis/redis.conf  
+
 
       - name: Alembic upgrade heads
         run: poetry run alembic -c alembic.ini upgrade heads
