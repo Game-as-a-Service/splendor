@@ -32,7 +32,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
         env:
-          - ALLOW_EMPTY_PASSWORD=yes
+          REDIS_PASSWORD: ${{secrets.REDIS_PASSWORD}}
 
     steps:
       - name: Checkout code
