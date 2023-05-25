@@ -56,22 +56,11 @@ jobs:
       - name: Wait for Redis to start
         run: sleep 10
       
-      - name: Install Redis client library
-        run: pip install redis
+      - name: Install redis cli # so we can test the server
+        run: sudo apt-get install -y redis-tools
 
-      - name: Run password verification
-        run: |
-          python - <<EOF
-          import redis
-
-          redis_host = 'localhost'
-          redis_port = 6379
-          redis_password = 'secret'
-
-          r = redis.Redis(host=redis_host, port=redis_port, password=redis_password)
-          print(r.ping())
-          EOF
-
+      - name: Verify that redis is up
+        run: redis-cli ping
 
       - name: Poetry run pytest
         run: poetry run pytest
