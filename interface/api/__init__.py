@@ -33,7 +33,7 @@ def create_app():  # noqa: C901
         SESSION_REDIS=redis.Redis(
             host=app.config["SESSION_REDIS_HOST"],
             port=app.config["SESSION_REDIS_PORT"],
-            password=app.config["SESSION_REDIS_PASSWORD"],
+            password="",
             db=app.config.get("SESSION_REDIS_DB", 0),
             ssl=app.config.get("SESSION_REDIS_SSL", False),
         ),
