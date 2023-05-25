@@ -56,14 +56,22 @@ jobs:
       - name: Wait for Redis to start
         run: sleep 10
       
-      - name: Install redis-server
-        run: |
-          pip install redis-server
+      - name: Install Redis client library
+        run: pip install redis
 
-
-      - name: Run Redis Server
+      - name: Run password verification
         run: |
-          redis-server --requirepass ${{ secrets.REDIS_PASSWORD }}
+          python - <<EOF
+          import redis
+
+          redis_host = 'localhost'
+          redis_port = 6379
+          redis_password = '${{ secrets.REDIS_PASSWORD }}'
+
+          r = redis.Redis(host=redis_host, port=redis_port, password=redis_password)
+          print(r.ping())
+          EOF
+
 
       - name: Poetry run pytest
         run: poetry run pytest
