@@ -49,7 +49,7 @@ jobs:
       - name: Debug Env
         run: |
           echo "${{ env.REDIS_CONTAINER }}"
-          docker exec -it ${{ env.REDIS_CONTAINER }} cat /usr/local/etc/redis/redis.conf
+          docker exec -t ${{ env.REDIS_CONTAINER }} cat /usr/local/etc/redis/redis.conf
 
       #    
       #     echo "requirepass $REDIS_PASSWORD" > redis.conf 
