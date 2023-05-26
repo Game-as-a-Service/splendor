@@ -6,25 +6,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8.0.26
-        env:
-          MYSQL_ROOT_PASSWORD: secret
-          MYSQL_DATABASE: splendor
-        ports:
-          - 3306:3306
-        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 3
+    # services:
+    #   mysql:
+    #     image: mysql:8.0.26
+    #     env:
+    #       MYSQL_ROOT_PASSWORD: secret
+    #       MYSQL_DATABASE: splendor
+    #     ports:
+    #       - 3306:3306
+    #     options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 3
 
-      redis:
-        image: redis:6
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+    #   redis:
+    #     image: redis:6
+    #     ports:
+    #       - 6379:6379
+    #     options: >-
+    #       --health-cmd "redis-cli ping"
+    #       --health-interval 10s
+    #       --health-timeout 5s
+    #       --health-retries 5
+    #     command:
+
 
     steps:
       - name: Checkout code
@@ -35,30 +37,14 @@ jobs:
         with:
           python-version: '3.11.3'
 
+      - name: Docker Compose Up
+        run: docker-compose up -d
+
       - name: Install Poetry
         run: pip install poetry
 
       - name: Install dependencies
         run: poetry install
-
-      - name: Set Redis password
-        run: |
-          echo "Current directory: $(pwd)"
-          echo "$(ls)"
-          echo "REDIS_CONTAINER=$(docker ps -f name=redis6 --format {{.Names}})" >> $GITHUB_ENV
-      - name: Debug Env
-        run: |
-          echo "${{ env.REDIS_CONTAINER }}"
-      # docker exec -t ${{ env.REDIS_CONTAINER }} ls -al /usr/local/etc/redis
-
-      #    
-      #     echo "requirepass $REDIS_PASSWORD" > redis.conf 
-      #     docker cp redis.conf redis6:/usr/local/etc/redis/redis.conf 
-      #   env:
-      #     REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
-
-      # - name: Start Redis
-      #   run: docker exec redis6 redis-server /usr/local/etc/redis/redis.conf 
 
       - name: Alembic upgrade heads
         run: poetry run alembic -c alembic.ini upgrade heads
