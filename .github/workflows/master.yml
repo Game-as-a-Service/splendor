@@ -45,11 +45,12 @@ jobs:
         run: poetry install
 
       - name: Set Redis password
+        id: debug
         run: |
           echo "Current directory: $(pwd)"
           echo "$(ls)"
-          echo "REDIS_CONTAINER=$(docker ps -f name=redis6 --format {{.Names}})"
-          docker exec -it $REDIS_CONTAINER cat /usr/local/etc/redis/redis.conf
+          echo "REDIS_CONTAINER=$(docker ps -f name=redis6 --format {{.Names}})" >> $GITHUB_ENV
+          docker exec -it ${{ env.REDIS_CONTAINER }} cat /usr/local/etc/redis/redis.conf
       #     echo "requirepass $REDIS_PASSWORD" > redis.conf 
       #     docker cp redis.conf redis6:/usr/local/etc/redis/redis.conf 
       #   env:
