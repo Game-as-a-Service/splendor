@@ -16,7 +16,7 @@ services:
 
   redis6:
     container_name: redis6
-    image: redis:6
+    image: redis:5
     ports:
       - "6379:6379"
     command: redis-server --requirepass secret
