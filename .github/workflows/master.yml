@@ -50,22 +50,6 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Set Redis password
-        run: |
-          echo "Current directory: $(pwd)"
-          echo "$(ls)"
-          docker ps
-          docker ps -a
-          docker exec -it redis:6 ls /usr/local/etc/redis
-          echo "requirepass $REDIS_PASSWORD" > redis.conf 
-          docker cp redis.conf redis6:/usr/local/etc/redis/redis.conf 
-        env:
-          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
-
-      - name: Start Redis
-        run: docker exec redis6 redis-server /usr/local/etc/redis/redis.conf 
-
-
       - name: Alembic upgrade heads
         run: poetry run alembic -c alembic.ini upgrade heads
 

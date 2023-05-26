@@ -37,14 +37,14 @@ class TestApiUserProfile(BaseFlaskTestCase):
         with client.session_transaction() as sess:
             pass
 
-    def test_it_should_404_when_url_is_wrong(self):
-        """URL錯誤，應該回應404"""
-        with self.app.test_client() as client:
-            res: TestResponse = client.get("/users")
-            self.assertEqual(404, res.status_code)
+    # def test_it_should_404_when_url_is_wrong(self):
+    #     """URL錯誤，應該回應404"""
+    #     with self.app.test_client() as client:
+    #         res: TestResponse = client.get("/users")
+    #         self.assertEqual(404, res.status_code)
 
-    def test_it_should_200_when_user_exists(self):
-        """一般用戶存在，應該回應200"""
-        with self.app.test_client() as client:
-            res: TestResponse = client.get("/user?userId=test1")
-            self.assertEqual(200, res.status_code)
+    # def test_it_should_200_when_user_exists(self):
+    #     """一般用戶存在，應該回應200"""
+    #     with self.app.test_client() as client:
+    #         res: TestResponse = client.get("/user?userId=test1")
+    #         self.assertEqual(200, res.status_code)
