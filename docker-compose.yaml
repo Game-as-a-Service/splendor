@@ -19,4 +19,6 @@ services:
     image: redis:6
     ports:
       - "6379:6379"
-    command: ["redis-server", "--requirepass secret"]
+    volumes:
+      - ./docker/redis-conf:/usr/local/etc/redis
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
