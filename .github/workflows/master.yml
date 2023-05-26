@@ -1,12 +1,6 @@
 name: master
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+on: [ push, workflow_dispatch ]
 
 jobs:
   build:
@@ -31,18 +25,18 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        env:
-          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}  
-
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.11.1'
+      # - name: Set up Python
+      #   uses: actions/setup-python@v2
+      #   with:
+      #     python-version: '3.11.1'
+
+      - name: Pip version
+        run: pip --version
 
       - name: Install Poetry
         run: pip install poetry
@@ -54,17 +48,15 @@ jobs:
         run: |
           echo "Current directory: $(pwd)"
           echo "$(ls)"
-          docker ps
-          docker ps -a
-          docker exec -it redis:6 ls /usr/local/etc/redis
-          echo "requirepass $REDIS_PASSWORD" > redis.conf 
-          docker cp redis.conf redis6:/usr/local/etc/redis/redis.conf 
-        env:
-          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+          echo "REDIS_CONTAINER=$(docker ps -f name=redis6 --format {{.Names}})"
+          docker exec -it $REDIS_CONTAINER cat /usr/local/etc/redis/redis.conf
+      #     echo "requirepass $REDIS_PASSWORD" > redis.conf 
+      #     docker cp redis.conf redis6:/usr/local/etc/redis/redis.conf 
+      #   env:
+      #     REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
 
-      - name: Start Redis
-        run: docker exec redis6 redis-server /usr/local/etc/redis/redis.conf 
-
+      # - name: Start Redis
+      #   run: docker exec redis6 redis-server /usr/local/etc/redis/redis.conf 
 
       - name: Alembic upgrade heads
         run: poetry run alembic -c alembic.ini upgrade heads
