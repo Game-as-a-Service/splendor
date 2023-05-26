@@ -41,7 +41,7 @@ jobs:
         run: docker-compose up -d
 
       - name: Install Poetry
-        run: pip install poetry
+        run: curl -sSL https://install.python-poetry.org | python3 -
 
       - name: Install dependencies
         run: poetry install
