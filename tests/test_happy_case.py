@@ -1,11 +1,10 @@
 from requests import Response
 
-from domain.bonus import Bonus
-from domain.card import DevelopmentCard
-from domain.player import Player
-from domain.resource import Resource, Token
 from tests.base_flask_test_case import BaseFlaskTestCase
-
+from domain.Player import Player
+from domain.Token import Token
+from domain.DevelopmentCard import DevelopmentCard
+from domain.Resource import Resource
 
 class TestHappyCase(BaseFlaskTestCase):
     def setUp(self) -> None:
@@ -21,20 +20,23 @@ class TestHappyCase(BaseFlaskTestCase):
             self.assertEqual(200, res.status_code)
             self.assertEqual("API is alive.", res.json["message"])
 
-    def test玩家用4個黑寶石購買10號lv1卡片(self):
-        p = Player()
-        p.resource.存錢(Token.onyx)
-        p.resource.存錢(Token.onyx)
-        p.resource.存錢(Token.onyx)
-        p.resource.存錢(Token.onyx)
-        cost = Resource()  # 4個黑寶石
-        cost.onyx = 4
-        bonus = Bonus()  # 無獎勵
-        bonus.emerald = 1
-        card = DevelopmentCard(10, 1, 1, cost, bonus)  # 10號lv1卡片
-        # When   #####################################
-        p.buy_development_card(cost, card)
-        # Then   #####################################
-        self.assertEqual(1, p.score)
-        self.assertEqual(1, len(p.development_cards))
-        self.assertEqual(0, p.resource.onyx)
+    def test_player_buy_No10_lv1_card_success(self):
+        # Given 玩家手中有4個黑色token
+        player = Player()
+        player.get_token(Token.onyx)
+        player.get_token(Token.onyx)
+        player.get_token(Token.onyx)
+        player.get_token(Token.onyx)
+
+        cost = Resource()
+        cost.add_token(Token.onyx)
+        cost.add_token(Token.onyx)
+        cost.add_token(Token.onyx)
+        cost.add_token(Token.onyx)
+
+        card = DevelopmentCard(1, 10, 1, cost, Token.emerald)
+        # When
+        player.buy_development_card(card)
+        # Then
+        self.assertEqual(player.resource.black, 0)
+        self.assertEqual(player.score, 1)
