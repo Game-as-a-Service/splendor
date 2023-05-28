@@ -2,32 +2,25 @@ from .developmentcard import Developmentcard
 
 class Bonus:
     def __init__(self) -> None:
-        self.white: int = 0
-        self.blue: int = 0
-        self.green: int = 0
-        self.red: int = 0
-        self.black: int = 0
+        self.diamond: int = 0
+        self.sapphire: int = 0
+        self.emerald: int = 0
+        self.ruby: int = 0
+        self.onyx: int = 0
     
     def add_bonus(self,card:Developmentcard):
-        bonus_color = {
-            "diamond": "white",
-            "sapphire": "blue",
-            "emerald": "green",
-            "ruby": "red",
-            "onyx": "black"
-        }
-        bonus_type = bonus_color.get(card.bonus)
-        if bonus_type:
-            setattr(self, bonus_type, getattr(self, bonus_type) + 1)
+        setattr(self, card.bonus.value, getattr(self, card.bonus.value) + 1)
+
+        #setattr(self, card.bonus, getattr(self, card.bonus) + 1)
         """
         if card.bonus=="diamond":
-            self.white+=1
+            self.diamond+=1
         elif card.bonus=="sapphire":
-            self.blue+=1
+            self.sapphire+=1
         elif card.bonus=="emerald":
-            self.green+=1
+            self.emerald+=1
         elif card.bonus=="ruby":
-            self.red+=1
+            self.ruby+=1
         elif card.bonus=="onyx":
-            self.black+=1
+            self.onyx+=1
         """

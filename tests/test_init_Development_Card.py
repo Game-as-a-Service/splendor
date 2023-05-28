@@ -1,9 +1,7 @@
 from requests import Response
 from tests.base_flask_test_case import BaseFlaskTestCase
 from domain.player import Player
-from domain.resource import Resource
-from domain.token import Token
-from domain.developmentcard import Developmentcard
+from domain.game import Game
 
 class TestApiHome(BaseFlaskTestCase):
     def setUp(self) -> None:
@@ -21,18 +19,22 @@ class TestApiHome(BaseFlaskTestCase):
 
     def test(self):
         #given
-        player1 = Player()
-        player1.get_token(Token.onyx)
-        player1.get_token(Token.onyx)
-        player1.get_token(Token.onyx)
-        player1.get_token(Token.onyx)
-
-        card = Developmentcard(1,10,Resource(0,0,0,0,4),1,Token.emerald)
+        PlayerA = Player()
+        PlayerB = Player()
+        
         #when
-        player1.buy_developmentcard(card)
+        Game1 = Game()
+        Game1.startGame()
+        
         #then
-        self.assertEqual(player1.resource.onyx,0)
-        self.assertEqual(player1.score,1)
-        
-        
+        for _ in range(4):
+            Game1.draw_card1()
+            Game1.draw_card2()
+            Game1.draw_card3()
 
+        self.assertEqual(len(Game1.table.card1),4)
+        self.assertEqual(len(Game1.table.card2),4)
+        self.assertEqual(len(Game1.table.card3),4)
+
+
+        

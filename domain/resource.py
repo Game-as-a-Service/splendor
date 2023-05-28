@@ -1,19 +1,23 @@
 from .token import Token
+
 class Resource:
-    def __init__(self):
-        self.token:list[Token]=[]
-        self.white: int = 0
-        self.blue: int = 0
-        self.green: int = 0
-        self.red: int = 0
-        self.black: int = 0
-        self.gold: int = 0
+    def __init__(self, diamond=0, sapphire=0, emerald=0, ruby=0, onyx=0):
+        self.token = [Token.diamond] * diamond + [Token.sapphire] * sapphire + [Token.emerald] * emerald + [Token.ruby] * ruby + [Token.onyx] * onyx
+        self.diamond = diamond
+        self.sapphire = sapphire
+        self.emerald = emerald
+        self.ruby = ruby
+        self.onyx = onyx
+        self.gold = 0
 
     def add_token(self,token:Token):
         self.token.append(token)
+        self.__dict__[token.name]+=1
     #花寶石
     def spend_token(self,tokens:list[Token]):
         for token in tokens:
-            for i in self.token:
-                if i.name == token.name:
-                    self.token.remove(token)
+            if self.__dict__[token.name] > 0:
+                self.token.remove(token)
+                self.__dict__[token.name] -= 1
+
+        
