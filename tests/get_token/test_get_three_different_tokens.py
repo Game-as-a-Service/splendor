@@ -31,7 +31,7 @@ class TestGetThreeDifferentTokens(BaseFlaskTestCase):
 
         # given
         game = Game()
-        player_a = Player()
+        player_a = Player(game)
         game.players = [player_a]
         game.table.resource = self._prepare_resource("243")
         taken_resource = self._prepare_resource("111")
