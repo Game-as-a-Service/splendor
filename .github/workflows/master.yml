@@ -48,6 +48,11 @@ jobs:
               
       - name: Set config
         run: cp config/sample_api_config.py config/api_config.py
+      
+      - name: Set alembic.ini
+        run: |
+          cp alembic.ini_sample alembic.ini
+          sed -i "s|mysql+pymysql://root:secret@127.0.0.1:3306/ReplaceME|mysql+pymysql://root:secret@127.0.0.1:3306/${{ secrets.SQLAlCHEMY_URL }}|g" alembic.ini
 
       - name: Alembic upgrade heads
         run: poetry run alembic -c alembic.ini upgrade heads
