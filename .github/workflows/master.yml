@@ -45,6 +45,9 @@ jobs:
 
       - name: Install dependencies
         run: poetry install
+              
+      - name: Set config
+        run: cp config/sample_api_config.py config/api_config.py
 
       - name: Alembic upgrade heads
         run: poetry run alembic -c alembic.ini upgrade heads
