@@ -82,4 +82,5 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{ env.REPO_OWNER }}/${{ env.REPO_NAME }}/splendor:latest
+          
 
