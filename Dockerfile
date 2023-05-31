@@ -17,6 +17,9 @@ ENV WORKER=$WORKER
 
 RUN pip3 install --no-cache-dir awscli
 
-COPY . /root/gme/
+COPY . /root/gem/
 WORKDIR /root/gem/
+
+ENV FLASK_APP=mainapp.py
+CMD ["flask", "run", "--host=0.0.0.0"]
 
