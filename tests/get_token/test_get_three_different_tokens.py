@@ -47,6 +47,6 @@ class TestGetThreeDifferentTokens(BaseFlaskTestCase):
         for quantity, token in zip(resource_str, map(Token, Token.__members__)):
             ret.__setattr__(token.name, quantity)
             if int(quantity) > 0:
-                for i in range(int(quantity)):
+                for _ in range(int(quantity)):
                     ret.token.append(token)
         return ret
