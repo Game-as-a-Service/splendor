@@ -59,6 +59,12 @@ jobs:
       - name: Poetry run pytest
         run: poetry run pytest
 
+        
+      - name: Modify api_config.py
+        run: |
+          sed -i 's|SESSION_REDIS_HOST = "localhost"|SESSION_REDIS_HOST = "host.docker.internal"|' config/api_config.py
+      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
