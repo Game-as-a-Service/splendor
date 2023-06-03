@@ -2,13 +2,11 @@ from .bonus import Bonus
 from .card import DevelopmentCard
 from .resource import Resource, Token
 from .noble import Noble
+from .table import Table
 
 
 class Player:
-    def __init__(self, game):
-        from .game import Game
-
-        self.game: Game = game
+    def __init__(self):
         self.score: int = 0
         self.resource: Resource = Resource()
         self.development_cards: list[DevelopmentCard] = []
@@ -16,16 +14,16 @@ class Player:
         self.bonus: Bonus = Bonus()
         self.nobles: list[Noble] = []
 
-    def get_token(self, resource: Resource):
+    def get_token(self, resource: Resource, table: Table):
         for token in resource.token:
             self.resource.token.append(token)
             self.resource.__setattr__(
                 token.name, self.resource.__getattribute__(token.name) + 1
             )
-            self.game.table.resource.token.remove(Token.__getitem__(token.name))
-            self.game.table.resource.__setattr__(
+            table.resource.token.remove(Token.__getitem__(token.name))
+            table.resource.__setattr__(
                 token.name,
-                int(self.game.table.resource.__getattribute__(token.name)) - 1,
+                int(table.resource.__getattribute__(token.name)) - 1,
             )
 
     def buy_development_card(self, cost: Resource, card: DevelopmentCard) -> None:

@@ -1,10 +1,6 @@
-from domain.game import Game
 from domain.player import Player
-
-# from domain.table import Table
+from domain.table import Table
 from domain.resource import Resource, Token
-
-
 from tests.base_flask_test_case import BaseFlaskTestCase
 
 
@@ -30,22 +26,21 @@ class TestGetThreeDifferentTokens(BaseFlaskTestCase):
         """happy path: player get 3 different tokens from table"""
 
         # given
-        game = Game()
-        player_a = Player(game)
-        game.players = [player_a]
-        game.table.resource = self._prepare_resource("243")
+        player_a = Player()
+        table = Table()
+        table.resource = self._prepare_resource("243")
         taken_resource = self._prepare_resource("111")
 
         # when
-        player_a.get_token(taken_resource)
+        player_a.get_token(taken_resource, table)
 
         # then
         self.assertEqual(player_a.resource.diamond, 1)
         self.assertEqual(player_a.resource.sapphire, 1)
         self.assertEqual(player_a.resource.emerald, 1)
-        self.assertEqual(game.table.resource.diamond, 1)
-        self.assertEqual(game.table.resource.sapphire, 3)
-        self.assertEqual(game.table.resource.emerald, 2)
+        self.assertEqual(table.resource.diamond, 1)
+        self.assertEqual(table.resource.sapphire, 3)
+        self.assertEqual(table.resource.emerald, 2)
 
     def _prepare_resource(self, resource_str: str) -> Resource:
         ret = Resource()
