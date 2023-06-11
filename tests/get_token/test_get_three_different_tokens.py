@@ -6,14 +6,12 @@ from tests.base_flask_test_case import BaseFlaskTestCase
 
 class TestGetThreeDifferentTokens(BaseFlaskTestCase):
     """test get three different tokens
-    given:
-        player A has empty resource
-        table has resource: {diamond=2, sapphire=4, emerald=3}
-    when:
-        player A take 3 different tokens: {diamond=1, sapphire=1, emerald=1}
-    then:
-        player A has resource: {diamond=1, sapphire=1, emerald=1}
-        table has resource: {diamond=1, sapphire=3, emerald=2}
+    case01: (happy path) player get 3 different tokens from table
+    case02: player can get 2 or less different tokens from table if table has only 2 or less different tokens
+    case03: invalid action if player request token that table don't exist
+    case04: invalid action if player request 4 or more tokens
+    case05: invalid action if player request 2 or less different tokens while table has 3 or more different tokens
+    case06: invalid action if player request 0 token
     """
 
     def setUp(self) -> None:
@@ -23,7 +21,17 @@ class TestGetThreeDifferentTokens(BaseFlaskTestCase):
         return super().tearDown()
 
     def test_get_three_different_tokens_case01(self) -> None:
-        """happy path: player get 3 different tokens from table"""
+        """happy path: player get 3 different tokens from table
+
+        given:
+            player A has empty resource
+            table has resource: {diamond=2, sapphire=4, emerald=3}
+        when:
+            player A take 3 different tokens: {diamond=1, sapphire=1, emerald=1}
+        then:
+            player A has resource: {diamond=1, sapphire=1, emerald=1}
+            table has resource: {diamond=1, sapphire=3, emerald=2}
+        """
 
         # given
         player_a = Player()
@@ -41,6 +49,19 @@ class TestGetThreeDifferentTokens(BaseFlaskTestCase):
         self.assertEqual(table.resource.diamond, 1)
         self.assertEqual(table.resource.sapphire, 3)
         self.assertEqual(table.resource.emerald, 2)
+
+    def test_get_three_different_tokens_case02(self) -> None:
+        """player can get 2 or less different tokens from table if table has only 2 or less different tokens
+
+        given:
+            player A has empty resource
+            table has resource: {diamond=2, sapphire=4}
+        when:
+            player A take 2 different tokens: {diamond=1, sapphire=1}
+        then:
+            player A has resource: {diamond=1, sapphire=1}
+            table has resource: {diamond=1, sapphire=3}
+        """
 
     def _prepare_resource(self, resource_str: str) -> Resource:
         ret = Resource()
