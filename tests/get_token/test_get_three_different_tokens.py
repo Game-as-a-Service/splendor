@@ -63,6 +63,21 @@ class TestGetThreeDifferentTokens(BaseFlaskTestCase):
             table has resource: {diamond=1, sapphire=3}
         """
 
+        # given
+        player_a = Player()
+        table = Table()
+        table.resource = self._prepare_resource("24")
+        taken_resource = self._prepare_resource("11")
+
+        # when
+        player_a.get_token(taken_resource, table)
+
+        # then
+        self.assertEqual(player_a.resource.diamond, 1)
+        self.assertEqual(player_a.resource.sapphire, 1)
+        self.assertEqual(table.resource.diamond, 1)
+        self.assertEqual(table.resource.sapphire, 3)
+
     def _prepare_resource(self, resource_str: str) -> Resource:
         ret = Resource()
         for quantity, token in zip(resource_str, map(Token, Token.__members__)):
