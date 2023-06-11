@@ -16,14 +16,18 @@ class Player:
 
     def get_token(self, resource: Resource, table: Table):
         for token in resource.token:
-            self.resource.token.append(token)
-            self.resource.__setattr__(
-                token.name, self.resource.__getattribute__(token.name) + 1
-            )
-            table.resource.token.remove(Token.__getitem__(token.name))
+            try:
+                table.resource.token.remove(Token.__getitem__(token.name))
+            except ValueError as e:
+                e.add_note
+                raise ValueError(f"There is no {token.name} to get.")
             table.resource.__setattr__(
                 token.name,
                 int(table.resource.__getattribute__(token.name)) - 1,
+            )
+            self.resource.token.append(token)
+            self.resource.__setattr__(
+                token.name, self.resource.__getattribute__(token.name) + 1
             )
 
     def buy_development_card(self, cost: Resource, card: DevelopmentCard) -> None:

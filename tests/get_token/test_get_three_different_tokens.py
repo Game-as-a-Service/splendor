@@ -78,6 +78,32 @@ class TestGetThreeDifferentTokens(BaseFlaskTestCase):
         self.assertEqual(table.resource.diamond, 1)
         self.assertEqual(table.resource.sapphire, 3)
 
+    def test_get_three_different_tokens_case03(self) -> None:
+        """invalid action if player request token that table don't exist
+
+        given:
+            player A has empty resource
+            table has resource: {diamond=2, sapphire=4}
+        when:
+            player A take 3 different tokens: {diamond=1, sapphire=1, emerald=1}
+        then:
+            get exception with emerald because table do not have emerald
+        """
+
+        # given
+        player_a = Player()
+        table = Table()
+        table.resource = self._prepare_resource("24")
+        taken_resource = self._prepare_resource("111")
+
+        # when
+        with self.assertRaises(Exception) as cm:
+            player_a.get_token(taken_resource, table)
+
+        # then
+        the_exception = cm.exception
+        self.assertIn(Token.emerald.value, the_exception.__str__().split())
+
     def _prepare_resource(self, resource_str: str) -> Resource:
         ret = Resource()
         for quantity, token in zip(resource_str, map(Token, Token.__members__)):
