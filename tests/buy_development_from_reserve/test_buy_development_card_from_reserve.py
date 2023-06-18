@@ -44,8 +44,8 @@ class TestBuyDevelopmentCardFromReserve(BaseFlaskTestCase):
         player_a.resource.diamond = 1
         player_a.resource.sapphire = 1
         player_a.resource.ruby = 1
-        player_a.resource.onyx = 2
-        # player_a.resource.gold = 1
+        player_a.resource.onyx = 1
+        player_a.resource.gold = 1
 
         lv1_no11_card = DevelopmentCard(11, 1, 0, Resource(), Bonus())
         lv1_no11_card.bonus.emerald = 1
@@ -60,17 +60,15 @@ class TestBuyDevelopmentCardFromReserve(BaseFlaskTestCase):
         # when
         player_a = game.players[0]
         development_card = player_a.reserve_development_cards[0]
-        resource = player_a.choose_resource(diamond=1, sapphire=1, ruby=1, onyx=2)
-        # resource = player_a.resource
-        if game.check_can_buy(resource, development_card):
-            player_a.buy_development_card_from_reserve(resource, development_card)
+        resource = player_a.choose_resource(diamond=1, sapphire=1, ruby=1, onyx=1, gold=1)
+        player_a.buy_development_card_from_reserve(resource, development_card)
 
         # then
         self.assertEqual(player_a.resource.diamond, 0)
         self.assertEqual(player_a.resource.sapphire, 0)
         self.assertEqual(player_a.resource.ruby, 0)
         self.assertEqual(player_a.resource.onyx, 0)
-        # self.assertEqual(player_a.resource.gold, 0)
+        self.assertEqual(player_a.resource.gold, 0)
         self.assertEqual(lv1_no11_card in player_a.reserve_development_cards, False) # 驗證改判斷該卡不存在保留發展卡中
         self.assertEqual(lv1_no11_card in player_a.development_cards, True)
         self.assertEqual(player_a.bonus.emerald, 1)
