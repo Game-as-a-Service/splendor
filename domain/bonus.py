@@ -6,4 +6,3 @@ class Bonus:
         self.emerald: int = emerald
         self.ruby: int = ruby
         self.onyx: int = onyx
-        
