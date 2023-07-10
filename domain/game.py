@@ -5,6 +5,7 @@ from enum import Enum
 from .table import Table
 from .player import Player
 from typing import List
+from .table import set_noble
 
 class Game():
     def __init__(self) -> None:
@@ -16,7 +17,8 @@ class Game():
 
     
     def start_game(self)->None:
-        pass
+        self.table.set_gold()
+        self.table.set_noble(len(self.players))
 
     def set_last_round(self)->None:
         pass

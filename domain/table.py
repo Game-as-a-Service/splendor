@@ -2,6 +2,7 @@ from typing import List
 from .resource import Resource
 from .card import DevelopmentCard
 from .noble import Noble
+from .noble import get_noble
 
 class Table:
     def __init__(self) -> None:
@@ -19,4 +20,12 @@ class Table:
 
     def replenish_card(self,level:int)->None:
         pass
-    
+
+    def set_noble(self, players = int):
+        nobles = get_noble(players)
+        for noble in nobles:
+            self.nobles.append(noble)
+
+    # init
+    def set_gold(self):
+        self.resource.gold = 5

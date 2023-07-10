@@ -8,10 +8,12 @@ from config.api_config import Config
 from interface.api.common.mail.system_mailer import SystemMailer
 
 from ...repository.mySQL.account.user_info_service import UserInfoService
+from application.user_case.game_user_case import GameUserCase
 
 service_classes = [
     UserInfoService,
     SystemMailer,
+    GameUserCase,
 ]
 
 

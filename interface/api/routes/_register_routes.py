@@ -5,6 +5,7 @@ from config.api_config import Config
 from interface.api.routes.account.api_user_profile import ApiUserProfile
 from interface.api.routes.api_home import ApiHome
 from interface.api.routes.api_preview import ApiPreview
+from interface.api.routes.game.api_game_start import ApiGameStart
 from interface.api.routes.open_api_spec import OpenApiSpec
 
 
@@ -23,3 +24,6 @@ def setup_routes(app: Flask):
 
     # User 相關
     api.add_resource(ApiUserProfile, "/user", "/user/<user_id>")
+
+    # Game 相關
+    api.add_resource(ApiGameStart, "/game/start")
